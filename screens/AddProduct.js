@@ -32,13 +32,16 @@ export default class AddProduct extends React.Component {
   render() {
     return (
         <View style={styles.container}>
+          <Text style={styles.getStartedText}>
+            Automatically recognizes barcode on the screen.
+          </Text>
           {this.state.hasCameraPermission === null ?
             <Text>Requesting for camera permission</Text> :
             this.state.hasCameraPermission === false ?
               <Text>Camera permission is not granted</Text> :
               <BarCodeScanner
                 onBarCodeRead={this._handleBarCodeRead}
-                style={{ height: 200, width: 200 }}
+                style={{ height: 300, width: 300 }}
               />
           }
         </View>
@@ -53,5 +56,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
     backgroundColor: '#ecf0f1',
+  },
+  getStartedText: {
+    paddingBottom: Constants.statusBarHeight,
+    fontSize: 17,
+    color: 'rgba(96,100,109, 1)',
+    lineHeight: 24,
+    textAlign: 'center',
   },
 });

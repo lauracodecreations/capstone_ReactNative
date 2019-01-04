@@ -7,6 +7,23 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import AddProduct from '../screens/AddProduct';
 import SettingsScreen from '../screens/SettingsScreen';
+import ProductsList from '../screens/ProductList';
+
+
+const ProductsStack = createStackNavigator({
+  Links: ProductsList,
+});
+
+
+ProductsStack.navigationOptions = {
+  tabBarLabel: 'Products',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+    />
+  ),
+};
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -72,6 +89,7 @@ SettingsStack.navigationOptions = {
 
 export default createBottomTabNavigator({
   HomeStack,
+  ProductsStack,
   LinksStack,
   AddProductStack,
   SettingsStack,

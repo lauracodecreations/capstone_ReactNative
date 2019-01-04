@@ -54,7 +54,7 @@ export default class ProductList extends Component {
     />
   );
 
-  _keyExtractor = (item, index) => item.id;
+  _keyExtractor = (item, index) => `list-item-${index}`;
 
   render() {
     return (

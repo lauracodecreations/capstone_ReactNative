@@ -7,7 +7,7 @@ import {
   View
 } from 'react-native';
 
-import BookcaseItem from './Product';
+import Item from './Product';
 
 export default class ProductList extends Component {
 
@@ -45,7 +45,7 @@ export default class ProductList extends Component {
   }
 
   _renderItem = ({item}) => (
-    <BookcaseItem
+    <Item
       id={item.id}
       date={item.date}
       title={item.title}

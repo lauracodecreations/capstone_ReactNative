@@ -1,16 +1,36 @@
 import React, { Component } from 'react';
+import {Button, NavigatorIOS, Text, View} from 'react-native';
+import EditBook from './EditBook';
 import {
     StyleSheet,
     TouchableOpacity,
-    Text,
     Image,
-    View
   } from 'react-native';
 
 export default class Product extends Component {
+
+        _handleNavigationRequest() {
+        this.refs.nav.push({
+        component: EditBook,
+        title: 'Genius',
+        passProps: { myProp: 'genius' },
+        });
+        }
     render() {
-        return(
+
+          return(
           <View style={styles.rowContainer}>
+          <NavigatorIOS
+                 ref='nav'
+                 initialRoute={{
+                   component: EditBook,
+                   title: 'Foo This',
+                   passProps: { myProp: 'foo' },
+                   rightButtonTitle: 'Add',
+                   onRightButtonPress: () => this._handleNavigationRequest(),
+                 }}
+                 style={{flex: 1}}
+               />
             <Image source={{uri: this.props.thumbnail}}
             style={styles.thumbnail}
             resizeMode="contain" />

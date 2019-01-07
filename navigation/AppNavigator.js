@@ -1,7 +1,7 @@
 import React from 'react';
 import { createSwitchNavigator, createStackNavigator } from 'react-navigation';
 import ProductList from '../screens/ProductList';
-import EditBook from '../screens/EditBook';
+import EditProduct from '../screens/EditProduct';
 import AddProduct from '../screens/AddProduct';
 
 import MainTabNavigator from './MainTabNavigator';
@@ -13,8 +13,8 @@ const BookcaseStack = createStackNavigator({
             header: null,
         }),
     },
-    EditBook: {
-        screen: EditBook,
+    EditProduct: {
+        screen: EditProduct,
         navigationOptions: ({navigation}) => ({
             header: null,
             tabBarVisible: false,
@@ -47,12 +47,12 @@ const createRootNavigator = () => {
     );
 };
 
-const AppStack = createStackNavigator({ EditBook: EditBook, ProductList: ProductList });
+const AppStack = createStackNavigator({ EditBook: EditProduct, ProductList: ProductList });
 
 
 export default createSwitchNavigator({
   // You could add another route here for authentication.
   // Read more at https://reactnavigation.org/docs/en/auth-flow.html
-  EditBook: AppStack,
+  EditProduct: AppStack,
   Main: MainTabNavigator,
 });

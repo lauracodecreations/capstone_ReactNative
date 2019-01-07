@@ -8,7 +8,6 @@ import LinksScreen from '../screens/LinksScreen';
 import AddProduct from '../screens/AddProduct';
 import SettingsScreen from '../screens/SettingsScreen';
 import ProductList from '../screens/ProductList';
-import EditBook from '../screens/EditBook';
 
 
 

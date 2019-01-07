@@ -6,7 +6,7 @@ import {
     Button
 } from 'react-native';
 
-export default class EditBook extends Component {
+export default class EditProduct extends Component {
 
   render() {
     const { navigation } = this.props;
@@ -17,7 +17,7 @@ export default class EditBook extends Component {
           More information for product number #{JSON.stringify(itemId)}
         </Text>
         <Button
-                    title="Back To Products"
+                    title="Back To Homepage"
                     onPress={() => this.props.navigation.navigate('Main')}
                 />
       </View>

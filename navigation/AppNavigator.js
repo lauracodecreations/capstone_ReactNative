@@ -1,10 +1,58 @@
 import React from 'react';
-import { createSwitchNavigator } from 'react-navigation';
+import { createSwitchNavigator, createStackNavigator } from 'react-navigation';
+import ProductList from '../screens/ProductList';
+import EditBook from '../screens/EditBook';
+import AddProduct from '../screens/AddProduct';
 
 import MainTabNavigator from './MainTabNavigator';
+
+const BookcaseStack = createStackNavigator({
+    Bookcase: {
+        screen: ProductList,
+        navigationOptions: ({navigation}) => ({
+            header: null,
+        }),
+    },
+    EditBook: {
+        screen: EditBook,
+        navigationOptions: ({navigation}) => ({
+            header: null,
+            tabBarVisible: false,
+            gesturesEnabled: false
+        }),
+    },
+});
+
+const createRootNavigator = () => {
+    return createStackNavigator(
+        {
+            Tabs: {
+                screen: MainTabNavigator,
+                navigationOptions: ({navigation}) => ({
+                    gesturesEnabled: false,
+                })
+            },
+            BookcaseStack: {
+                screen: BookcaseStack,
+                navigationOptions: ({navigation}) => ({
+                    gesturesEnabled: false,
+                })
+            }
+
+        },
+        {
+            headerMode: "none",
+            mode: "modal"
+        }
+    );
+};
+
+const AppStack = createStackNavigator({ EditBook: EditBook, ProductList: ProductList });
+
 
 export default createSwitchNavigator({
   // You could add another route here for authentication.
   // Read more at https://reactnavigation.org/docs/en/auth-flow.html
+  EditBook: AppStack,
   Main: MainTabNavigator,
 });

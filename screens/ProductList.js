@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { StackNavigator } from 'react-navigation'
 import {
   StatusBar,
   StyleSheet,
@@ -51,6 +52,7 @@ export default class ProductList extends Component {
       title={item.title}
       upc={item.upc}
       thumbnail={item.thumbnail}
+      navigation={this.props.navigation}
     />
   );
 

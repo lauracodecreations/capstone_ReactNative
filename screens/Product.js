@@ -1,53 +1,36 @@
 import React, { Component } from 'react';
 import {Button, NavigatorIOS, Text, View} from 'react-native';
-import EditBook from './EditBook';
+import { createStackNavigator, createAppContainer } from 'react-navigation'
 import {
-    StyleSheet,
-    TouchableOpacity,
-    Image,
-  } from 'react-native';
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 
 export default class Product extends Component {
+  render() {
 
-        _handleNavigationRequest() {
-        this.refs.nav.push({
-        component: EditBook,
-        title: 'Genius',
-        passProps: { myProp: 'genius' },
-        });
-        }
-    render() {
-
-          return(
-          <View style={styles.rowContainer}>
-          <NavigatorIOS
-                 ref='nav'
-                 initialRoute={{
-                   component: EditBook,
-                   title: 'Foo This',
-                   passProps: { myProp: 'foo' },
-                   rightButtonTitle: 'Add',
-                   onRightButtonPress: () => this._handleNavigationRequest(),
-                 }}
-                 style={{flex: 1}}
-               />
-            <Image source={{uri: this.props.thumbnail}}
-            style={styles.thumbnail}
-            resizeMode="contain" />
-            <View style={styles.rowText}>
-              <Text style={styles.upc} numberOfLines={1} ellipsizeMode ={'tail'}>
-                {this.props.date}
-              </Text>
-              <Text style={styles.title} numberOfLines={2} ellipsizeMode ={'tail'}>
-                {this.props.title}
-              </Text>
-              <Text style={styles.upc} numberOfLines={1} ellipsizeMode ={'tail'}>
-                {this.props.upc}
-              </Text>
-            </View>
-          </View>
-        );
-    }
+    return(
+    <TouchableOpacity onPress={() => this.props.navigation.navigate('EditBook', {id: this.props.id})}>
+     <View style={styles.rowContainer}>
+      <Image source={{uri: this.props.thumbnail}}
+      style={styles.thumbnail}
+      resizeMode="contain" />
+      <View style={styles.rowText}>
+      <Text style={styles.upc} numberOfLines={1} ellipsizeMode ={'tail'}>
+      {this.props.date}
+      </Text>
+      <Text style={styles.title} numberOfLines={2} ellipsizeMode ={'tail'}>
+      {this.props.title}
+      </Text>
+      <Text style={styles.upc} numberOfLines={1} ellipsizeMode ={'tail'}>
+      {this.props.upc}
+      </Text>
+      </View>
+      </View>
+      </TouchableOpacity>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -87,4 +70,4 @@ const styles = StyleSheet.create({
     flex: 4,
     flexDirection: 'column'
   }
-  });
+});

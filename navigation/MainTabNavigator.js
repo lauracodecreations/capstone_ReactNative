@@ -7,11 +7,13 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import AddProduct from '../screens/AddProduct';
 import SettingsScreen from '../screens/SettingsScreen';
-import ProductsList from '../screens/ProductList';
+import ProductList from '../screens/ProductList';
+import EditBook from '../screens/EditBook';
+
 
 
 const ProductsStack = createStackNavigator({
-  Links: ProductsList,
+  Links: ProductList,
 });
 
 

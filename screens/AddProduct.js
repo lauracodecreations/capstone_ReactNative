@@ -10,7 +10,7 @@ export default class AddProduct extends React.Component {
 
   state = {
     hasCameraPermission: null,
-    data: ""
+    upc: ""
   };
 
   componentDidMount() {
@@ -26,7 +26,7 @@ export default class AddProduct extends React.Component {
 
   _handleBarCodeRead = data => {
     this.setState({
-        data
+        upc: data.data
     })
     Alert.alert(
       'Scan successful!',
@@ -49,7 +49,7 @@ export default class AddProduct extends React.Component {
                 style={{ height: 300, width: 300 }}
               />
           }
-          <Wrapper data={this.state.data}/>
+          <Text> {this.state.upc}</Text>
         </View>
     );
   }

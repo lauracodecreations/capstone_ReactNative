@@ -1,7 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View, Alert,Image } from 'react-native';
 import { Constants, BarCodeScanner, Permissions } from 'expo';
-import Wrapper from './Wrapper'
 
 export default class AddProduct extends React.Component {
   static navigationOptions = {
@@ -10,7 +9,9 @@ export default class AddProduct extends React.Component {
 
   state = {
     hasCameraPermission: null,
-    upc: ""
+    upc: "",
+    image: "",
+    title: "",
   };
 
   componentDidMount() {
@@ -34,7 +35,23 @@ export default class AddProduct extends React.Component {
     );
   };
 
+  getInfoFromAPI(upc) {
+    console.log('searching ');
+    fetch(`https://api.upcitemdb.com/prod/trial/lookup?upc=${upc}`)
+    .then(function(response) {
+      return response.json()
+    }).then((json) => {
+      console.log(json);
+      this.setState({
+        image: json.items[0].images[0],
+        title: json.items[0].title
+      })
+      console.log(this.state);
+    })
+  }
+
   render() {
+    let image =this.state.image
     return (
         <View style={styles.container}>
           <Text style={styles.getStartedText}>
@@ -46,10 +63,12 @@ export default class AddProduct extends React.Component {
               <Text>Camera permission is not granted</Text> :
               <BarCodeScanner
                 onBarCodeRead={this._handleBarCodeRead}
-                style={{ height: 300, width: 300 }}
+                style={{ height: 200, width: 200 }}
               />
           }
-          <Text> {this.state.upc}</Text>
+          <Text> {this.getInfoFromAPI(`${this.state.upc}`)}</Text>
+          <Text> {this.state.title}</Text>
+          <Image source={{uri:image}} />
         </View>
     );
   }

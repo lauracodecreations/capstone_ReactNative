@@ -45,6 +45,11 @@ export default class ProductList extends Component {
     }
   }
 
+  componentWillReceiveProps() {
+    this.setState({
+      items: this.props.items,
+    })
+  }
   _renderItem = ({item}) => (
     <Item
       id={item.id}

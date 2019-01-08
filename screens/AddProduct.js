@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Alert } from 'react-native';
 import { Constants, BarCodeScanner, Permissions } from 'expo';
+import Wrapper from './Wrapper'
 
 export default class AddProduct extends React.Component {
   static navigationOptions = {
@@ -8,7 +9,8 @@ export default class AddProduct extends React.Component {
   };
 
   state = {
-    hasCameraPermission: null
+    hasCameraPermission: null,
+    data: ""
   };
 
   componentDidMount() {
@@ -23,9 +25,12 @@ export default class AddProduct extends React.Component {
   };
 
   _handleBarCodeRead = data => {
+    this.setState({
+        data
+    })
     Alert.alert(
       'Scan successful!',
-      JSON.stringify(data)
+      JSON.stringify(data.data)
     );
   };
 
@@ -44,6 +49,7 @@ export default class AddProduct extends React.Component {
                 style={{ height: 300, width: 300 }}
               />
           }
+          <Wrapper data={this.state.data}/>
         </View>
     );
   }

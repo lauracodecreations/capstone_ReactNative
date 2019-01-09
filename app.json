@@ -25,6 +25,10 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.AdaDevelopersAcademy.SkinCareTracker"
+    },
+    "splash": {
+    "image": "./assets/splash.png",
+    "resizeMode": "cover"
     }
   }
 }

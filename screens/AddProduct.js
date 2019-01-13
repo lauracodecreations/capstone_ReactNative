@@ -9,9 +9,6 @@ export default class AddProduct extends React.Component {
 
   state = {
     hasCameraPermission: null,
-    upc: "",
-    image: "",
-    title: "",
   };
 
   componentDidMount() {
@@ -26,13 +23,7 @@ export default class AddProduct extends React.Component {
   };
 
   _handleBarCodeRead = data => {
-    this.setState({
-        upc: data.data
-    })
-    Alert.alert(
-      'Scan successful!',
-      JSON.stringify(data.data)
-    );
+    this.props.navigation.navigate('AddDate', {upc: data.data})
   };
 
   getInfoFromAPI(upc) {
@@ -66,9 +57,6 @@ export default class AddProduct extends React.Component {
                 style={{ height: 200, width: 200 }}
               />
           }
-          <Text> {this.getInfoFromAPI(`${this.state.upc}`)}</Text>
-          <Text> {this.state.title}</Text>
-          <Image source={{uri:image}} />
         </View>
     );
   }

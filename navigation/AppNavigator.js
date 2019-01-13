@@ -2,6 +2,9 @@ import React from 'react';
 import { createSwitchNavigator, createStackNavigator } from 'react-navigation';
 import ProductList from '../screens/ProductList';
 import EditProduct from '../screens/EditProduct';
+import AddDate from '../screens/AddDate';
+
+
 
 import MainTabNavigator from './MainTabNavigator';
 
@@ -13,5 +16,6 @@ export default createSwitchNavigator({
   //order matters
   Main: MainTabNavigator,
   EditProduct: EditProduct,
+  AddDate: AddDate,
   ProductList: ProductList,
 });

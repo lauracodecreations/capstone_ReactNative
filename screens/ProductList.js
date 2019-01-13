@@ -16,47 +16,29 @@ export default class ProductList extends Component {
     title: 'Products',
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      items: [
-        {
-          id: 1,
-          title: 'Maybelline New York Expert Wear Shadow Palette, The Blushed Nudes, 0.34 oz',
-          date: 'Nov 3, 2010',
-          upc: '041554434866',
-          thumbnail: 'https://scstylecaster.files.wordpress.com/2017/03/best-minimalist-beauty-products-feat.png'
-        },
-        {
-          id: 2,
-          title: 'Eyeliner',
-          date: 'Nov 3, 2010',
-          upc: '041554434866',
-          thumbnail: 'https://scstylecaster.files.wordpress.com/2017/03/best-minimalist-beauty-products-feat.png'
-        },
-        {
-          id: 3,
-          title: '1984',
-          date: 'Nov 3, 2010',
-          upc: '041554434866',
-          thumbnail: 'https://scstylecaster.files.wordpress.com/2017/03/best-minimalist-beauty-products-feat.png'
-        }
-      ]
-    }
-  }
+  state = {
+    items: "",
+  };
 
-  componentWillReceiveProps() {
-    this.setState({
-      items: this.props.items,
+  getInfoFromAPI() {
+    fetch(`https://productsbarcode.herokuapp.com/products/`)
+    .then(function(response) {
+      return response.json()
+    }).then((json) => {
+      console.log(json);
+      this.setState({
+        items: json
+      })
     })
   }
+
   _renderItem = ({item}) => (
     <Item
       id={item.id}
       date={item.date}
-      title={item.title}
+      title={item.name}
       upc={item.upc}
-      thumbnail={item.thumbnail}
+      thumbnail={item.image}
       navigation={this.props.navigation}
     />
   );
@@ -66,6 +48,7 @@ export default class ProductList extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text> {this.getInfoFromAPI()} </Text>
         <StatusBar
           barStyle="light-content"
         />

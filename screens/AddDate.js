@@ -18,8 +18,7 @@ export default class EditProduct extends Component {
     color: "",
     date: "",
     notes: "",
-    pao:"",
-    photo: "https://scstylecaster.files.wordpress.com/2017/03/best-minimalist-beauty-products-feat.png"
+    pao:""
   };
 
 
@@ -48,7 +47,7 @@ export default class EditProduct extends Component {
         <Text>UPC: {itemUPC}</Text>
         <Text style={styles.title}>Name: {this.state.name}</Text>
         <Text style={styles.title}>Image: {this.state.image}</Text>
-        <Image source={{uri: this.state.photo}}
+        <Image source={{uri: this.state.image}}
         style={styles.thumbnail}
         resizeMode="contain" />
         <Button

@@ -21,9 +21,9 @@ export default class EditProduct extends Component {
 
   getInfoFromAPI(upc) {
     fetch(`https://api.upcitemdb.com/prod/trial/lookup?upc=${upc}`)
-    .then(function(response) {
-      return response.json()
-    }).then((json) => {
+    .then((response) => response.json())
+    .then((json) => {
+
       this.setState({
         image: json.items[0].images[1],
         name: json.items[0].title,
@@ -31,25 +31,32 @@ export default class EditProduct extends Component {
         description: json.items[0].description,
         upc: json.items[0].ean,
         color: json.items[0].color,
-      })
+      });
     })
+    .catch((error) =>{
+      console.error(error);
+    });
   }
 
 
   postInfotoAPI() {
-    fetch(`https://api.upcitemdb.com/prod/trial/lookup?upc=`)
-    .then(function(response) {
-      return response.json()
-    }).then((json) => {
-      this.setState({
-        image: json.items[0].images[1],
-        name: json.items[0].title,
-        brand: json.items[0].brand,
-        description: json.items[0].description,
-        upc: json.items[0].ean,
-        color: json.items[0].color,
-      })
-    })
+    fetch('https://api.upcitemdb.com/prod/', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        image: this.state.image,
+        name: this.state.name,
+        upc: this.state.upc,
+        date: this.state.date,
+        brand: this.state.brand,
+        description: this.state.description,
+        color: this.state.color,
+        pao: this.state.text
+      }),
+    });
   }
 
   render() {

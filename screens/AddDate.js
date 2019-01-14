@@ -66,6 +66,7 @@ export default class AddDate extends Component {
         pao: this.state.text
       }),
     });
+    this.props.navigation.navigate('Main')
   }
 
   render() {
@@ -107,10 +108,6 @@ export default class AddDate extends Component {
                     }
                     iconRight
                     onPress={() => this.postInfotoAPI()}
-                />
-        <Button
-                    title="Back To Homepage"
-                    onPress={() => this.props.navigation.navigate('Main')}
                 />
       </View>
     );

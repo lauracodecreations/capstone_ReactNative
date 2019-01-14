@@ -17,12 +17,7 @@ export default class EditProduct extends Component {
        text:""
      };
 
-     this.setDate = this.setDate.bind(this);
    }
-
-   setDate(newDate) {
-    this.setState({chosenDate: newDate})
-  }
 
   getInfoFromAPI(upc) {
     fetch(`https://api.upcitemdb.com/prod/trial/lookup?upc=${upc}`)
@@ -72,10 +67,6 @@ export default class EditProduct extends Component {
                 style={{height: 40}}
                 placeholder="PAO number"
                 onChangeText={(text) => this.setState({text})}
-        />
-        <DatePickerIOS
-              date={this.state.chosenDate}
-              onDateChange={this.setDate}
         />
         <Button
                     title="Save"

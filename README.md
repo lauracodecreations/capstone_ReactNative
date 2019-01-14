@@ -12,6 +12,7 @@ To run `skincare-app` on your local machince, clone this repo, and run the follo
 $ brew install node
 $ brew install watchman
 $ npm install -g react-native-cli
+$ npm install --save react-native-elements@beta
 $ npm start
 ```
 To be edited with real LINK:

@@ -26,21 +26,6 @@ export default class AddProduct extends React.Component {
     this.props.navigation.navigate('AddDate', {upc: data.data})
   };
 
-  getInfoFromAPI(upc) {
-    console.log('searching ');
-    fetch(`https://api.upcitemdb.com/prod/trial/lookup?upc=${upc}`)
-    .then(function(response) {
-      return response.json()
-    }).then((json) => {
-      console.log(json);
-      this.setState({
-        image: json.items[0].images[0],
-        title: json.items[0].title
-      })
-      console.log(this.state);
-    })
-  }
-
   render() {
     let image =this.state.image
     return (

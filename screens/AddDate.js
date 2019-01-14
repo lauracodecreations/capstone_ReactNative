@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Button } from 'react-native-elements';
+import { StackNavigator } from 'react-navigation'
 import {
-    StyleSheet,
-    Text,
-    View,
-    Button,
-    Image,
-    TextInput,
-    DatePickerIOS,
+  StatusBar,
+  StyleSheet,
+  TextInput,
+  Text,
+  View
 } from 'react-native';
 
-export default class EditProduct extends Component {
+import Item from './Product';
+
+export default class AddDate extends Component {
+
+  static navigationOptions = {
+    title: 'Add Product',
+  };
+
   constructor(props) {
      super(props);
      this.state = {
-       chosenDate: new Date(),
        text:""
      };
 
@@ -34,7 +41,9 @@ export default class EditProduct extends Component {
       });
     })
     .catch((error) =>{
-      console.error(error);
+      this.setState({
+        errors: `Failure ${error.message}`
+      });
     });
   }
 
@@ -64,19 +73,39 @@ export default class EditProduct extends Component {
     const itemUPC = navigation.getParam('upc', 'NO-UPC');
     return (
       <View style={styles.container}>
+        <Text> {this.errors ? `Failure ${this.errors}` : ''} </Text>
         <Text>{this.getInfoFromAPI(itemUPC)}</Text>
-        <Text>UPC: {itemUPC}</Text>
-        <Text >Name: {this.state.name}</Text>
-        <Text >Image: {this.state.image}</Text>
-        <Image source={{uri: `${this.state.image}`}}
-        resizeMode="contain" />
-        <TextInput
-                style={{height: 40}}
-                placeholder="PAO number"
-                onChangeText={(text) => this.setState({text})}
+        <StatusBar
+          barStyle="light-content"
         />
+        <Item
+          date={this.state.date}
+          title={this.state.name}
+          upc={itemUPC}
+          thumbnail={this.state.image}
+          navigation={this.props.navigation}
+        />
+        <Text style={styles.text}> Please enter PAO number: </Text>
+        <TextInput
+                style={styles.textbox}
+                placeholder="PAO number"
+                autofocus={true}
+                label="PAO Number"
+                onChangeText={(text) => this.setState({text})}
+
+        />
+        <Text style={styles.space}>  </Text>
         <Button
-                    title="Save"
+                    title="Add to Products"
+
+                    icon={
+                      <Icon
+                        name='arrow-right'
+                        size={15}
+                        color='white'
+                      />
+                    }
+                    iconRight
                     onPress={() => this.postInfotoAPI()}
                 />
         <Button
@@ -91,17 +120,35 @@ export default class EditProduct extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#F5FCFF',
+    paddingTop: 15,
+    backgroundColor: '#ecf0f1',
+    height: 110,
+    padding: 10,
+    marginRight: 10,
+    marginLeft: 10,
+    marginTop: 10,
+    borderRadius: 4,
+    shadowOffset:{  width: 1,  height: 1,  },
+    shadowColor: '#CCC',
+    shadowOpacity: 1.0,
+    shadowRadius: 1
   },
-  title: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  textbox: {
+    height: 40,
+    width: 316,
+    marginRight: 10,
+    marginLeft: 10,
+    backgroundColor: '#FFFFFF',
+    borderColor: 'gray',
+    borderWidth: 1,
+    color: '#000000',
   },
-  thumbnail: {
-    flex: 1,
-    height: undefined,
-    width: undefined
+  text: {
+    marginRight: 10,
+    marginLeft: 10,
+    paddingTop: 15,
   },
+  space: {
+    paddingTop: 60
+  }
 });

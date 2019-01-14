@@ -8,7 +8,24 @@ import LinksScreen from '../screens/LinksScreen';
 import AddProduct from '../screens/AddProduct';
 import SettingsScreen from '../screens/SettingsScreen';
 import ProductList from '../screens/ProductList';
+import AddDate from '../screens/AddDate';
 
+
+
+const AddDateStack = createStackNavigator({
+  Links: AddDate,
+});
+
+
+AddDateStack.navigationOptions = {
+  tabBarLabel: 'Add Date',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-list' : 'md-link'}
+    />
+  ),
+};
 
 
 const ProductsStack = createStackNavigator({
@@ -45,7 +62,6 @@ const LinksStack = createStackNavigator({
   Links: LinksScreen,
 });
 
-
 LinksStack.navigationOptions = {
   tabBarLabel: 'Links',
   tabBarIcon: ({ focused }) => (
@@ -70,9 +86,11 @@ SettingsStack.navigationOptions = {
   ),
 };
 
+
 export default createBottomTabNavigator({
   ProductsStack,
   LinksStack,
   AddProductStack,
   SettingsStack,
+  AddDateStack,
 });

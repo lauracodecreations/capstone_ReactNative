@@ -5,15 +5,24 @@ import {
     View,
     Button,
     Image,
-    TextInput
+    TextInput,
+    DatePickerIOS,
 } from 'react-native';
 
 export default class EditProduct extends Component {
+  constructor(props) {
+     super(props);
+     this.state = {
+       chosenDate: new Date(),
+       text:""
+     };
 
-  state = {
-    text: "",
-  };
+     this.setDate = this.setDate.bind(this);
+   }
 
+   setDate(newDate) {
+    this.setState({chosenDate: newDate})
+  }
 
   getInfoFromAPI(upc) {
     fetch(`https://api.upcitemdb.com/prod/trial/lookup?upc=${upc}`)
@@ -30,6 +39,24 @@ export default class EditProduct extends Component {
       })
     })
   }
+
+
+  postInfotoAPI() {
+    fetch(`https://api.upcitemdb.com/prod/trial/lookup?upc=`)
+    .then(function(response) {
+      return response.json()
+    }).then((json) => {
+      this.setState({
+        image: json.items[0].images[1],
+        name: json.items[0].title,
+        brand: json.items[0].brand,
+        description: json.items[0].description,
+        upc: json.items[0].ean,
+        color: json.items[0].color,
+      })
+    })
+  }
+
   render() {
     const { navigation } = this.props;
     const itemUPC = navigation.getParam('upc', 'NO-UPC');
@@ -46,11 +73,14 @@ export default class EditProduct extends Component {
                 placeholder="PAO number"
                 onChangeText={(text) => this.setState({text})}
         />
-        <TextInput
-                style={{height: 40}}
-                placeholder="Exporation Date (optional)"
-                onChangeText={(text) => this.setState({text})}
+        <DatePickerIOS
+              date={this.state.chosenDate}
+              onDateChange={this.setDate}
         />
+        <Button
+                    title="Save"
+                    onPress={() => this.postInfotoAPI()}
+                />
         <Button
                     title="Back To Homepage"
                     onPress={() => this.props.navigation.navigate('Main')}
@@ -64,7 +94,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   title: {

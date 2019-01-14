@@ -92,5 +92,4 @@ export default createBottomTabNavigator({
   LinksStack,
   AddProductStack,
   SettingsStack,
-  AddDateStack,
 });

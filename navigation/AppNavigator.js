@@ -3,6 +3,8 @@ import { createSwitchNavigator, createStackNavigator } from 'react-navigation';
 import ProductList from '../screens/ProductList';
 import EditProduct from '../screens/EditProduct';
 import AddDate from '../screens/AddDate';
+import AddProduct from '../screens/AddProduct';
+
 
 
 
@@ -18,4 +20,5 @@ export default createSwitchNavigator({
   EditProduct: EditProduct,
   AddDate: AddDate,
   ProductList: ProductList,
+  AddProduct: AddProduct
 });

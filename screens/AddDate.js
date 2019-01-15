@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button } from 'react-native-elements';
+import { Header } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation'
 import {
   StatusBar,
@@ -13,10 +14,6 @@ import {
 import Item from './Product';
 
 export default class AddDate extends Component {
-
-  static navigationOptions = {
-    title: 'Add Product',
-  };
 
   constructor(props) {
      super(props);
@@ -74,6 +71,12 @@ export default class AddDate extends Component {
     const itemUPC = navigation.getParam('upc', 'NO-UPC');
     return (
       <View style={styles.container}>
+
+        <Header
+          leftComponent={{ icon: 'arrow-back', color: '#fff', onPress: () => this.props.navigation.navigate('AddProduct') }}
+          centerComponent={{ text: 'Add Product', style: { color: '#fff' } }}
+          rightComponent={{ icon: 'home', color: '#fff',onPress: () => this.props.navigation.navigate('Main') }}
+        />
         <Text> {this.errors ? `Failure ${this.errors}` : ''} </Text>
         <Text>{this.getInfoFromAPI(itemUPC)}</Text>
         <StatusBar

@@ -71,6 +71,13 @@ export default class EditProduct extends Component {
     const upc = navigation.getParam('upc', 'NO-UPC');
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const date = new Date(`${this.state.date}`)
+    if(this.state.isLoading){
+      return(
+        <View style={{flex: 1, padding: 20}}>
+          <ActivityIndicator/>
+        </View>
+      )
+    }
     return (
       <View style={styles.container}>
       <Header
@@ -81,7 +88,7 @@ export default class EditProduct extends Component {
            backgroundColor: '#000000',
          }}
       />
-      <Image source={{uri: this.state.image}}
+      <Image source={{uri: `${this.state.image}`}}
       resizeMode="contain" />
       <Text style={styles.body}> {date.toLocaleDateString("en-US", options)} </Text>
       <Text style={styles.title}> {this.state.name} </Text>

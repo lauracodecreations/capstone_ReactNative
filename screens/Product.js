@@ -11,7 +11,7 @@ export default class Product extends Component {
   render() {
 
     return(
-    <TouchableOpacity onPress={() => this.props.navigation.navigate('EditProduct', {id: this.props.id})}>
+    <TouchableOpacity onPress={() => this.props.navigation.navigate('EditProduct', {upc: this.props.upc})}>
      <View style={styles.rowContainer}>
       <Image source={{uri: this.props.thumbnail}}
       style={styles.thumbnail}

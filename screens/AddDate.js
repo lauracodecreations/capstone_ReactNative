@@ -18,31 +18,37 @@ export default class AddDate extends Component {
   constructor(props) {
      super(props);
      this.state = {
-       text:""
+       text:"",
+       isLoading: true
      };
-
    }
 
-  getInfoFromAPI(upc) {
-    fetch(`https://api.upcitemdb.com/prod/trial/lookup?upc=${upc}`)
-    .then((response) => response.json())
-    .then((json) => {
 
-      this.setState({
-        image: json.items[0].images[1],
-        name: json.items[0].title,
-        brand: json.items[0].brand,
-        description: json.items[0].description,
-        upc: json.items[0].ean,
-        color: json.items[0].color,
+   componentDidMount(){
+     const { navigation } = this.props;
+     const upc = navigation.getParam('upc', 'NO-UPC');
+     return fetch(`https://productsbarcode.herokuapp.com/products/${upc}`)
+     .then((response) => response.json())
+     .then((json) => {
+
+       this.setState({
+         isLoading: false,
+         image: json.items[0].images[1],
+         name: json.items[0].title,
+         brand: json.items[0].brand,
+         description: json.items[0].description,
+         upc: json.items[0].ean,
+         color: json.items[0].color,
+       },function(){
+
+       });
+     })
+     .catch((error) =>{
+       this.setState({
+         errors: ` ${error.message}`
+       });
       });
-    })
-    .catch((error) =>{
-      this.setState({
-        errors: `Failure ${error.message}`
-      });
-    });
-  }
+   }
 
 
   postInfotoAPI() {
@@ -78,7 +84,6 @@ export default class AddDate extends Component {
           rightComponent={{ icon: 'home', color: '#fff',onPress: () => this.props.navigation.navigate('Main') }}
         />
         <Text> {this.errors ? `Failure ${this.errors}` : ''} </Text>
-        <Text>{this.getInfoFromAPI(itemUPC)}</Text>
         <StatusBar
           barStyle="light-content"
         />

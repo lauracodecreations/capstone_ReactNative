@@ -82,6 +82,10 @@ export default class AddDate extends Component {
           leftComponent={{ icon: 'arrow-back', color: '#fff', onPress: () => this.props.navigation.navigate('AddProduct') }}
           centerComponent={{ text: 'Add Product', style: { color: '#fff' } }}
           rightComponent={{ icon: 'home', color: '#fff',onPress: () => this.props.navigation.navigate('Main') }}
+          containerStyle={{
+             backgroundColor: '#000000',
+             justifyContent: 'space-around',
+           }}
         />
         <Text> {this.errors ? `Failure ${this.errors}` : ''} </Text>
         <StatusBar
@@ -107,6 +111,7 @@ export default class AddDate extends Component {
         <Button
                     title="Add to Products"
                     onPress={() => this.postInfotoAPI()}
+                    color="#FFFFF"
                 />
       </View>
     );

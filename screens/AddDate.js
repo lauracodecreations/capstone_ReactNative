@@ -27,7 +27,7 @@ export default class AddDate extends Component {
    componentDidMount(){
      const { navigation } = this.props;
      const upc = navigation.getParam('upc', 'NO-UPC');
-     return fetch(`https://productsbarcode.herokuapp.com/products/${upc}`)
+     return fetch(`https://api.upcitemdb.com/prod/trial/lookup?upc=${upc}`)
      .then((response) => response.json())
      .then((json) => {
 
@@ -47,12 +47,13 @@ export default class AddDate extends Component {
        this.setState({
          errors: ` ${error.message}`
        });
+       console.log(error)
       });
    }
 
 
   postInfotoAPI() {
-    fetch('https://api.upcitemdb.com/prod/', {
+    fetch('https://productsbarcode.herokuapp.com/products/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -84,7 +85,6 @@ export default class AddDate extends Component {
           rightComponent={{ icon: 'home', color: '#fff',onPress: () => this.props.navigation.navigate('Main') }}
           containerStyle={{
              backgroundColor: '#000000',
-             justifyContent: 'space-around',
            }}
         />
         <Text> {this.errors ? `Failure ${this.errors}` : ''} </Text>

@@ -4,6 +4,7 @@ import {
     Text,
     View,
     Alert,
+    Image,
     ActivityIndicator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -47,12 +48,13 @@ export default class EditProduct extends Component {
 
       this.setState({
         isLoading: false,
-        image: json.items[0].images[1],
-        name: json.items[0].title,
-        brand: json.items[0].brand,
-        description: json.items[0].description,
-        upc: json.items[0].ean,
-        color: json.items[0].color,
+        image: json.image,
+        name: json.name,
+        brand: json.brand,
+        description: json.description,
+        upc: json.upc,
+        color: json.color,
+        date: json.date
       },function(){
 
       });
@@ -67,6 +69,8 @@ export default class EditProduct extends Component {
   render() {
     const { navigation } = this.props;
     const upc = navigation.getParam('upc', 'NO-UPC');
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const date = new Date(`${this.state.date}`)
     return (
       <View style={styles.container}>
       <Header
@@ -77,7 +81,15 @@ export default class EditProduct extends Component {
            backgroundColor: '#000000',
          }}
       />
-      <Text> {this.state.name} </Text>
+      <Image source={{uri: this.state.image}}
+      resizeMode="contain" />
+      <Text style={styles.body}> {date.toLocaleDateString("en-US", options)} </Text>
+      <Text style={styles.title}> {this.state.name} </Text>
+      <Text style={styles.body}> {this.state.description} </Text>
+      <Text style={styles.body}> {this.state.color} </Text>
+      <Text style={styles.body}> {this.state.brand} </Text>
+      <Text style={styles.upc}> {this.state.upc} </Text>
+      <Text style={styles.body}> {this.state.image} </Text>
       </View>
     );
   }
@@ -87,5 +99,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5FCFF',
-  }
+  },
+  title: {
+    paddingLeft: 10,
+    paddingTop: 5,
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#777',
+    alignItems: 'center',
+  },
+  upc: {
+    paddingLeft: 10,
+    marginTop: 5,
+    fontSize: 14,
+    color: '#777'
+  },
+  body: {
+    paddingLeft: 10,
+    paddingTop: 5,
+    fontSize: 16,
+    color: '#777'
+  },
 });

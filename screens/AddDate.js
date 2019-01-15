@@ -101,15 +101,6 @@ export default class AddDate extends Component {
         <Text style={styles.space}>  </Text>
         <Button
                     title="Add to Products"
-
-                    icon={
-                      <Icon
-                        name='arrow-right'
-                        size={15}
-                        color='white'
-                      />
-                    }
-                    iconRight
                     onPress={() => this.postInfotoAPI()}
                 />
       </View>

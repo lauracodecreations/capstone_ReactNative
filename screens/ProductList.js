@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StackNavigator } from 'react-navigation'
+import { ActivityIndicator  } from 'react-native';
 import {
   StatusBar,
   StyleSheet,
@@ -20,16 +21,26 @@ export default class ProductList extends Component {
     items: "",
   };
 
-  getInfoFromAPI() {
-    fetch(`https://productsbarcode.herokuapp.com/products/`)
-    .then(function(response) {
-      return response.json()
-    }).then((json) => {
-      console.log(json);
+  constructor(props){
+    super(props);
+    this.state ={ isLoading: true}
+  }
+
+  componentDidMount(){
+    return fetch(`https://productsbarcode.herokuapp.com/products/`)
+    .then((response) => response.json())
+    .then((json) => {
+
       this.setState({
+        isLoading: false,
         items: json
-      })
+      },function(){
+
+      });
     })
+    .catch((error) =>{
+       console.error(error);
+     });
   }
 
   _renderItem = ({item}) => (
@@ -46,9 +57,15 @@ export default class ProductList extends Component {
   _keyExtractor = (item, index) => `list-item-${index}`;
 
   render() {
+    if(this.state.isLoading){
+      return(
+        <View style={{flex: 1, padding: 20}}>
+          <ActivityIndicator/>
+        </View>
+      )
+    }
     return (
       <View style={styles.container}>
-        <Text> {this.getInfoFromAPI()} </Text>
         <StatusBar
           barStyle="light-content"
         />

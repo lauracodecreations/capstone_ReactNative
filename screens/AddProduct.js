@@ -39,7 +39,7 @@ export default class AddProduct extends React.Component {
               <Text>Camera permission is not granted</Text> :
               <BarCodeScanner
                 onBarCodeRead={this._handleBarCodeRead}
-                style={{ height: 200, width: 200 }}
+                style={{ height: 400, width: 300 }}
               />
           }
         </View>

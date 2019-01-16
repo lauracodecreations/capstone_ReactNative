@@ -11,6 +11,7 @@ export default class Product extends Component {
   render() {
     const date = new Date(`${this.props.date}`)
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    const formatted_date = date.toLocaleDateString("en-US", options)
     return(
     <TouchableOpacity onPress={() => this.props.navigation.navigate('EditProduct', {upc: this.props.upc})}>
      <View style={styles.rowContainer}>
@@ -19,7 +20,7 @@ export default class Product extends Component {
       resizeMode="contain" />
       <View style={styles.rowText}>
       <Text style={styles.upc} numberOfLines={1} ellipsizeMode ={'tail'}>
-      {date.toLocaleDateString("en-US", options)}
+      { formatted_date != "Invalid Date" ? formatted_date : "date not yet defined"}
       </Text>
       <Text style={styles.title} numberOfLines={2} ellipsizeMode ={'tail'}>
       {this.props.title}

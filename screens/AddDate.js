@@ -8,6 +8,7 @@ import {
   StyleSheet,
   TextInput,
   Text,
+  Alert,
   View
 } from 'react-native';
 
@@ -69,8 +70,22 @@ export default class AddDate extends Component {
         color: this.state.color,
         pao: this.state.text
       }),
+    }).then(function(response) {
+      return response.json()
+    }).then((json) => {
+      console.log(json.ok)
+      if(json.ok == false) {
+        Alert.alert("Product is already in database")
+      } else {
+        this.props.navigation.navigate('Main')
+      }
     });
-    this.props.navigation.navigate('Main')
+  }
+
+  alertScreen() {
+    Alert.alert(
+      'Product is already in the dataset',
+   );
   }
 
   render() {

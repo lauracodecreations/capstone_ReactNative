@@ -5,6 +5,7 @@ import {
     View,
     Alert,
     Image,
+    ScrollView,
     ActivityIndicator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -88,16 +89,16 @@ export default class EditProduct extends Component {
            backgroundColor: '#000000',
          }}
       />
+      <ScrollView style={styles.container}>
       <Text style={styles.upc}> {date.toLocaleDateString("en-US", options)} </Text>
       <Image source={{uri: this.state.image}}
       style={{width: 300, height: 300}}/>
       <Text style={styles.upc}> {this.state.upc} </Text>
       <Text style={styles.title}> {this.state.name} </Text>
-      <Text style={styles.space}> </Text>
       <Text style={styles.rowText}> {this.state.description} </Text>
       <Text style={styles.rowText}> Color: {this.state.color} </Text>
       <Text style={styles.rowText}> Brand: {this.state.brand} </Text>
-      <Text style={styles.rowText}> {this.state.image} </Text>
+      </ScrollView>
       </View>
     );
   }
@@ -111,6 +112,7 @@ const styles = StyleSheet.create({
   title: {
     paddingLeft: 10,
     paddingTop: 5,
+    paddingBottom: 2,
     fontSize: 18,
     fontWeight: 'bold',
     alignItems: 'center',
@@ -133,9 +135,6 @@ const styles = StyleSheet.create({
     color: '#777',
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  space: {
-    paddingTop: 60
   },
   rowText: {
     paddingTop: 10,

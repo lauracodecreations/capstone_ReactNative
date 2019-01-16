@@ -12,6 +12,9 @@ export default class Product extends Component {
     const date = new Date(`${this.props.date}`)
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     const formatted_date = date.toLocaleDateString("en-US", options)
+    let today = new Date();
+    const datecolor = date <= today ? styles.expired : styles.upc;
+
     return(
     <TouchableOpacity onPress={() => this.props.navigation.navigate('EditProduct', {upc: this.props.upc})}>
      <View style={styles.rowContainer}>
@@ -19,7 +22,7 @@ export default class Product extends Component {
       style={styles.thumbnail}
       resizeMode="contain" />
       <View style={styles.rowText}>
-      <Text style={styles.upc} numberOfLines={1} ellipsizeMode ={'tail'}>
+      <Text style={datecolor} numberOfLines={1} ellipsizeMode ={'tail'}>
       { formatted_date != "Invalid Date" ? formatted_date : "date not yet defined"}
       </Text>
       <Text style={styles.title} numberOfLines={2} ellipsizeMode ={'tail'}>
@@ -71,5 +74,11 @@ const styles = StyleSheet.create({
   rowText: {
     flex: 4,
     flexDirection: 'column'
+  },
+  expired: {
+    color: 'red',
+    paddingLeft: 10,
+    marginTop: 5,
+    fontSize: 14,
   }
 });

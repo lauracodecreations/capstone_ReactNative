@@ -31,25 +31,25 @@ export default class AddDate extends Component {
      return fetch(`https://api.upcitemdb.com/prod/trial/lookup?upc=${upc}`)
      .then((response) => response.json())
      .then((json) => {
+       console.log(json)
+       if (json.code != "OK") {
+         Alert.alert(json.message)
+       }
+         this.setState({
+           isLoading: false,
+           image: json.items[0].images[1],
+           name: json.items[0].title,
+           brand: json.items[0].brand,
+           description: json.items[0].description,
+           upc: json.items[0].ean,
+           color: json.items[0].color,
+         },function(){
 
-       this.setState({
-         isLoading: false,
-         image: json.items[0].images[1],
-         name: json.items[0].title,
-         brand: json.items[0].brand,
-         description: json.items[0].description,
-         upc: json.items[0].ean,
-         color: json.items[0].color,
-       },function(){
-
-       });
-     })
-     .catch((error) =>{
-       this.setState({
-         errors: ` ${error.message}`
-       });
-       console.log(error)
-      });
+         });
+       })
+       .catch((error) =>{
+         console.log(error)
+        });
    }
 
 

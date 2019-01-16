@@ -82,15 +82,15 @@ export default class EditProduct extends Component {
       <View style={styles.container}>
       <Header
         leftComponent={{ icon: 'arrow-back', color: '#fff',onPress: () => this.props.navigation.navigate('Main') }}
-        centerComponent={{ text: 'Product Details', style: { color: '#fff' } }}
+        centerComponent={{ text: 'Product Details', style: { color: '#fff', fontWeight: 'bold', fontSize: 16 } }}
         rightComponent={{ icon: 'delete', color: '#fff',onPress: () => this.alertScreen(upc)}}
         containerStyle={{
            backgroundColor: '#000000',
          }}
       />
       <Text style={styles.upc}> {date.toLocaleDateString("en-US", options)} </Text>
-      <Image source={{uri: `${this.state.image}`}}
-      resizeMode="contain" />
+      <Image source={{uri: this.state.image}}
+      style={{width: 300, height: 300}}/>
       <Text style={styles.upc}> {this.state.upc} </Text>
       <Text style={styles.title}> {this.state.name} </Text>
       <Text style={styles.space}> </Text>
@@ -111,21 +111,28 @@ const styles = StyleSheet.create({
   title: {
     paddingLeft: 10,
     paddingTop: 5,
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     alignItems: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     justifyContent: 'center'
+
   },
   upc: {
     paddingLeft: 10,
     marginTop: 5,
     fontSize: 14,
     color: '#777',
-    textAlign: 'center'
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   body: {
     paddingLeft: 10,
-    color: '#777'
+    color: '#777',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   space: {
     paddingTop: 60
@@ -135,5 +142,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingLeft: 10,
     color: '#777',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });

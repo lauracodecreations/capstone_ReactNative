@@ -90,10 +90,12 @@ export default class EditProduct extends Component {
          }}
       />
       <ScrollView style={styles.container}>
-      <Text style={styles.upc}> {date.toLocaleDateString("en-US", options)} </Text>
-      <Image source={{uri: this.state.image}}
-      style={{width: 300, height: 300}}/>
-      <Text style={styles.upc}> {this.state.upc} </Text>
+      <View style={styles.image}>
+        <Text style={styles.upc}> {date.toLocaleDateString("en-US", options)} </Text>
+        <Image source={{uri: this.state.image}}
+        style={{width: 200, height: 200}}/>
+        <Text style={styles.upc}> {this.state.upc}  </Text>
+      </View>
       <Text style={styles.title}> {this.state.name} </Text>
       <Text style={styles.rowText}> {this.state.description} </Text>
       <Text style={styles.rowText}> Color: {this.state.color} </Text>
@@ -109,17 +111,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  image: {
+    flex:1,
+    alignItems:'center',
+    justifyContent:'center'
+  },
   title: {
     paddingLeft: 10,
-    paddingTop: 5,
-    paddingBottom: 2,
+    paddingRight: 10,
+    paddingTop: 40,
+    paddingBottom: 10,
     fontSize: 18,
     fontWeight: 'bold',
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    justifyContent: 'center'
-
+    alignItems:'center',
+    justifyContent:'center'
   },
   upc: {
     paddingLeft: 10,
@@ -134,12 +139,15 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     color: '#777',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingRight: 10,
+
   },
   rowText: {
     paddingTop: 10,
     fontSize: 16,
     paddingLeft: 10,
+    paddingRight: 10,
     color: '#777',
     alignItems: 'center',
     justifyContent: 'center'

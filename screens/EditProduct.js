@@ -88,15 +88,16 @@ export default class EditProduct extends Component {
            backgroundColor: '#000000',
          }}
       />
+      <Text style={styles.upc}> {date.toLocaleDateString("en-US", options)} </Text>
       <Image source={{uri: `${this.state.image}`}}
       resizeMode="contain" />
-      <Text style={styles.body}> {date.toLocaleDateString("en-US", options)} </Text>
-      <Text style={styles.title}> {this.state.name} </Text>
-      <Text style={styles.body}> {this.state.description} </Text>
-      <Text style={styles.body}> {this.state.color} </Text>
-      <Text style={styles.body}> {this.state.brand} </Text>
       <Text style={styles.upc}> {this.state.upc} </Text>
-      <Text style={styles.body}> {this.state.image} </Text>
+      <Text style={styles.title}> {this.state.name} </Text>
+      <Text style={styles.space}> </Text>
+      <Text style={styles.rowText}> {this.state.description} </Text>
+      <Text style={styles.rowText}> Color: {this.state.color} </Text>
+      <Text style={styles.rowText}> Brand: {this.state.brand} </Text>
+      <Text style={styles.rowText}> {this.state.image} </Text>
       </View>
     );
   }
@@ -105,26 +106,34 @@ export default class EditProduct extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#fff',
   },
   title: {
     paddingLeft: 10,
     paddingTop: 5,
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
-    color: '#777',
     alignItems: 'center',
+    justifyContent: 'center'
   },
   upc: {
     paddingLeft: 10,
     marginTop: 5,
     fontSize: 14,
-    color: '#777'
+    color: '#777',
+    textAlign: 'center'
   },
   body: {
     paddingLeft: 10,
-    paddingTop: 5,
-    fontSize: 16,
     color: '#777'
   },
+  space: {
+    paddingTop: 60
+  },
+  rowText: {
+    paddingTop: 10,
+    fontSize: 16,
+    paddingLeft: 10,
+    color: '#777',
+  }
 });

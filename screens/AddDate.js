@@ -98,9 +98,8 @@ export default class AddDate extends Component {
       <View style={styles.container}>
 
         <Header
-          leftComponent={{ icon: 'arrow-back', color: '#fff', onPress: () => this.props.navigation.navigate('AddProduct') }}
           centerComponent={{ text: 'Add Product', style: { color: '#fff' } }}
-          rightComponent={{ icon: 'home', color: '#fff',onPress: () => this.props.navigation.navigate('Main') }}
+          leftComponent={{ text: 'Cancel', style: { color: '#fff' }, onPress: () => this.props.navigation.navigate('Main') }}
           containerStyle={{
              backgroundColor: '#000000',
            }}

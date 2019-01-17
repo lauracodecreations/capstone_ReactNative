@@ -23,7 +23,7 @@ export default class Product extends Component {
       resizeMode="contain" />
       <View style={styles.rowText}>
       <Text style={datecolor} numberOfLines={1} ellipsizeMode ={'tail'}>
-      { formatted_date != "Invalid Date" ? formatted_date : "date not yet defined"}
+      { formatted_date != "Invalid Date" ? formatted_date : ""}
       </Text>
       <Text style={styles.title} numberOfLines={2} ellipsizeMode ={'tail'}>
       {this.props.title}

@@ -32,7 +32,7 @@ export default class App extends Component {
       <View style={styles.container}>
       <Header
         leftComponent={{ text: 'Cancel', style: { color: '#fff' }, onPress: () => this.props.navigation.navigate('AddDate') }}
-        rightComponent={{ text: 'Save', style: { color: '#fff' } ,onPress: () => this.props.navigation.navigate('AddDate', {date: formatted_date}) }}
+        rightComponent={{ text: 'Save', style: { color: '#fff' } ,onPress: () => this.props.navigation.navigate('AddDate', {date: formatted_date, upc: itemUPC}) }}
         containerStyle={{
            backgroundColor: '#000000',
          }}

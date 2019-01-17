@@ -138,7 +138,7 @@ export default class AddDate extends Component {
         <Text style={styles.space}>  </Text>
         <Button
                     title="Add to Products"
-                    onPress={() => this.props.navigation.navigate('EnterDate')}
+                    onPress={() => this.postInfotoAPI()}
                     color="#FFFFF"
                 />
         <Text style={styles.space}>  </Text>

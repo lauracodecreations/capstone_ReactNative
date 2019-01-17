@@ -103,10 +103,11 @@ export default class AddDate extends Component {
         </View>
         <TouchableOpacity onPress={() => this.props.navigation.navigate('EnterDate', {upc: this.state.upc})}>
         <View style={{ flexDirection:'row', justifyContent: 'space-between' }}>
-          <Text style={styles.text}> Best Before: {expirationDate}
+          <Text style={styles.text}> Best Before: {expirationDate} <Text></Text>
           <Icon
-          name='chevron-right' />
-          <Text style={styles.space}>  </Text>
+          name='edit'
+          size={20}
+           />
           </Text>
         </View>
         </TouchableOpacity>

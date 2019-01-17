@@ -1,7 +1,7 @@
 import React from 'react';
 import { createSwitchNavigator, createStackNavigator } from 'react-navigation';
 import ProductList from '../screens/ProductList';
-import EditProduct from '../screens/EditProduct';
+import ShowProduct from '../screens/ShowProduct';
 import AddDate from '../screens/AddDate';
 import AddProduct from '../screens/AddProduct';
 import EnterDate from '../screens/EnterDate';
@@ -19,7 +19,7 @@ export default createSwitchNavigator({
   // Read more at https://reactnavigation.org/docs/en/auth-flow.html
   //order matters
   Main: MainTabNavigator,
-  EditProduct: EditProduct,
+  ShowProduct: ShowProduct,
   AddDate: AddDate,
   ProductList: ProductList,
   AddProduct: AddProduct,

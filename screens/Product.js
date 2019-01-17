@@ -16,7 +16,7 @@ export default class Product extends Component {
     const datecolor = date <= today ? styles.expired : styles.upc;
 
     return(
-    <TouchableOpacity onPress={() => this.props.navigation.navigate('EditProduct', {upc: this.props.upc})}>
+    <TouchableOpacity onPress={() => this.props.navigation.navigate('ShowProduct', {upc: this.props.upc})}>
      <View style={styles.rowContainer}>
       <Image source={{uri: this.props.thumbnail}}
       style={styles.thumbnail}

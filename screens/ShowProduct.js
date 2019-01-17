@@ -12,7 +12,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button } from 'react-native-elements';
 import { Header } from 'react-native-elements';
 
-export default class EditProduct extends Component {
+export default class ShowProduct extends Component {
 
   constructor(props) {
      super(props);

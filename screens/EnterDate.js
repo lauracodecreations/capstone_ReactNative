@@ -31,7 +31,7 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
       <Header
-        leftComponent={{ text: 'Cancel', style: { color: '#fff' }, onPress: () => this.props.navigation.navigate('AddDate') }}
+        leftComponent={{ text: 'Cancel', style: { color: '#fff' }, onPress: () => this.props.navigation.navigate('AddDate', {upc: itemUPC} ) }}
         rightComponent={{ text: 'Save', style: { color: '#fff' } ,onPress: () => this.props.navigation.navigate('AddDate', {date: formatted_date, upc: itemUPC}) }}
         containerStyle={{
            backgroundColor: '#000000',

@@ -20,7 +20,7 @@ export default class AddDate extends Component {
      super(props);
      this.state = {
        text:"",
-       isLoading: true
+       isLoading: true,
      };
    }
 
@@ -102,7 +102,6 @@ export default class AddDate extends Component {
              backgroundColor: '#000000',
            }}
         />
-        <Text> {this.errors ? `Failure ${this.errors}` : ''} </Text>
         <StatusBar
           barStyle="light-content"
         />
@@ -113,7 +112,7 @@ export default class AddDate extends Component {
           thumbnail={this.state.image}
           navigation={this.props.navigation}
         />
-        <Text style={styles.text}> Please enter PAO number: </Text>
+        <Text style={styles.text}> Period After Opening: </Text>
         <TextInput
                 style={styles.textbox}
                 placeholder="PAO number"

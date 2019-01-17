@@ -3,9 +3,11 @@ import {
   DatePickerIOS,
   View,
   StyleSheet,
+  ScrollView,
 } from 'react-native'
 import { Button } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation'
+import { Header } from 'react-native-elements';
 
 
 export default class App extends Component {
@@ -28,16 +30,22 @@ export default class App extends Component {
     const itemUPC = navigation.getParam('upc', 'NO-UPC');
     return (
       <View style={styles.container}>
+      <Header
+        leftComponent={{ text: 'Cancel', style: { color: '#fff' }, onPress: () => this.props.navigation.navigate('AddDate') }}
+        rightComponent={{ text: 'Save', style: { color: '#fff' } ,onPress: () => this.props.navigation.navigate('AddDate', {date: formatted_date}) }}
+        containerStyle={{
+           backgroundColor: '#000000',
+         }}
+      />
+      <ScrollView style={styles.container}>
         <DatePickerIOS
           date={this.state.chosenDate}
           onDateChange={this.setDate}
         />
-        <Button
-                    title="Save"
-                    onPress={() => this.props.navigation.navigate('AddDate', {upc: itemUPC, date: formatted_date})}
-                    color="#FFFFF"
-                />
+      </ScrollView>
       </View>
+
+
 
     )
   }
@@ -46,6 +54,6 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center'
+    backgroundColor: '#fff',
   },
 })

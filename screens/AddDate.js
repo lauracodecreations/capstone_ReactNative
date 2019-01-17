@@ -8,9 +8,9 @@ import {
   StyleSheet,
   TextInput,
   Text,
-  DatePickerIOS,
   Alert,
-  View
+  View,
+  TouchableOpacity
 } from 'react-native';
 
 import Item from './Product';
@@ -25,33 +25,6 @@ export default class AddDate extends Component {
      };
    }
 
-
-   componentDidMount(){
-     const { navigation } = this.props;
-     const upc = navigation.getParam('upc', 'NO-UPC');
-     return fetch(`https://api.upcitemdb.com/prod/trial/lookup?upc=${upc}`)
-     .then((response) => response.json())
-     .then((json) => {
-       console.log(json)
-       if (json.code != "OK") {
-         Alert.alert(json.message)
-       }
-         this.setState({
-           isLoading: false,
-           image: json.items[0].images[1],
-           name: json.items[0].title,
-           brand: json.items[0].brand,
-           description: json.items[0].description,
-           upc: json.items[0].ean,
-           color: json.items[0].color,
-         },function(){
-
-         });
-       })
-       .catch((error) =>{
-         console.log(error)
-        });
-   }
 
 
   postInfotoAPI() {
@@ -117,22 +90,21 @@ export default class AddDate extends Component {
           thumbnail={this.state.image}
           navigation={this.props.navigation}
         />
-        <Text style={styles.text}> Period After Opening: </Text>
-        <TextInput
-                style={styles.textbox}
-                placeholder="PAO number"
-                autofocus={true}
-                label="PAO Number"
-                onChangeText={(text) => this.setState({text})}
+        <View style={{ flexDirection:'row' }}>
+          <Text style={styles.text}> Period After Opening: </Text>
+          <TextInput
+                  style={styles.textbox}
+                  placeholder="PAO number"
+                  autofocus={true}
+                  label="PAO"
+                  onChangeText={(text) => this.setState({text})}
 
-        />
+          />
+        </View>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('EnterDate', {upc: this.state.upc})}>
+          <Text style={styles.text}> Best Before: {expirationDate} </Text>
+        </TouchableOpacity>
         <Text style={styles.space}>  </Text>
-        <Text> {expirationDate}  </Text>
-        <Button
-                    title="Enter Expiration Date"
-                    onPress={() =>  this.props.navigation.navigate('EnterDate', {upc: this.state.upc})}
-                    color="#FFFFF"
-                />
         <Button
                     title="Add to Products"
                     onPress={() => this.props.navigation.navigate('EnterDate')}
@@ -160,13 +132,14 @@ const styles = StyleSheet.create({
     shadowRadius: 1
   },
   textbox: {
-    height: 40,
-    width: 316,
+    height: 30,
+    width: 80,
     marginRight: 10,
-    marginLeft: 10,
+    marginLeft: 30,
     backgroundColor: '#FFFFFF',
     borderColor: 'gray',
     borderWidth: 1,
+    alignItems: 'center',
     color: '#000000',
   },
   text: {
@@ -176,5 +149,10 @@ const styles = StyleSheet.create({
   },
   space: {
     paddingTop: 60
+  },
+  input: {
+    paddingTop: 10,
+    height: 40,
+    width: 80,
   }
 });

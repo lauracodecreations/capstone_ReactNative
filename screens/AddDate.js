@@ -28,6 +28,8 @@ export default class AddDate extends Component {
 
 
   postInfotoAPI() {
+    const { navigation } = this.props;
+    const date = navigation.getParam('date');
     fetch('https://productsbarcode.herokuapp.com/products/', {
       method: 'POST',
       headers: {
@@ -38,7 +40,7 @@ export default class AddDate extends Component {
         image: this.state.image,
         name: this.state.name,
         upc: this.state.upc,
-        date: this.state.date,
+        date: date,
         brand: this.state.brand,
         description: this.state.description,
         color: this.state.color,

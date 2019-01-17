@@ -62,8 +62,31 @@ export default class AddDate extends Component {
    );
   }
 
-  setDate(newDate) {
-    this.setState({chosenDate: newDate})
+  componentDidMount(){
+    const { navigation } = this.props;
+    const upc = navigation.getParam('upc', 'NO-UPC');
+    return fetch(`https://api.upcitemdb.com/prod/trial/lookup?upc=${upc}`)
+    .then((response) => response.json())
+    .then((json) => {
+      console.log(json)
+      if (json.code != "OK") {
+        Alert.alert(json.message)
+      }
+        this.setState({
+          isLoading: false,
+          image: json.items[0].images[1],
+          name: json.items[0].title,
+          brand: json.items[0].brand,
+          description: json.items[0].description,
+          upc: json.items[0].ean,
+          color: json.items[0].color,
+        },function(){
+
+        });
+      })
+      .catch((error) =>{
+        console.log(error)
+       });
   }
 
   render() {
@@ -90,6 +113,7 @@ export default class AddDate extends Component {
           thumbnail={this.state.image}
           navigation={this.props.navigation}
         />
+        <Text></Text>
         <View style={{ flexDirection:'row' }}>
           <Text style={styles.text}> Period After Opening: </Text>
           <TextInput

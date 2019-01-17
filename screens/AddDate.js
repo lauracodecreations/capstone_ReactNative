@@ -144,7 +144,6 @@ export default class AddDate extends Component {
                 />
         <Text style={styles.space}>  </Text>
         <Text style={styles.rowText}>
-        The Period After Opening symbol identifies the useful lifetime of a cosmetic product after its package has been opened for the first time.
         </Text>
       </View>
     );

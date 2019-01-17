@@ -8,6 +8,7 @@ import {
   StyleSheet,
   TextInput,
   Text,
+  DatePickerIOS,
   Alert,
   View
 } from 'react-native';
@@ -88,9 +89,13 @@ export default class AddDate extends Component {
    );
   }
 
+  setDate(newDate) {
+    this.setState({chosenDate: newDate})
+  }
+
   render() {
     const { navigation } = this.props;
-    const itemUPC = navigation.getParam('upc', 'NO-UPC');
+    const expirationDate = navigation.getParam('date', 'Not specified');
     return (
       <View style={styles.container}>
 
@@ -108,7 +113,7 @@ export default class AddDate extends Component {
         <Item
           date={this.state.date}
           title={this.state.name}
-          upc={itemUPC}
+          upc={this.state.upc}
           thumbnail={this.state.image}
           navigation={this.props.navigation}
         />
@@ -122,9 +127,15 @@ export default class AddDate extends Component {
 
         />
         <Text style={styles.space}>  </Text>
+        <Text> {expirationDate}  </Text>
+        <Button
+                    title="Enter Expiration Date"
+                    onPress={() =>  this.props.navigation.navigate('EnterDate', {upc: this.state.upc})}
+                    color="#FFFFF"
+                />
         <Button
                     title="Add to Products"
-                    onPress={() => this.postInfotoAPI()}
+                    onPress={() => this.props.navigation.navigate('EnterDate')}
                     color="#FFFFF"
                 />
       </View>

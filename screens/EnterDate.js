@@ -41,6 +41,7 @@ export default class App extends Component {
         <DatePickerIOS
           date={this.state.chosenDate}
           onDateChange={this.setDate}
+          mode="date"
         />
       </ScrollView>
       </View>

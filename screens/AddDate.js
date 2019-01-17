@@ -102,7 +102,13 @@ export default class AddDate extends Component {
           />
         </View>
         <TouchableOpacity onPress={() => this.props.navigation.navigate('EnterDate', {upc: this.state.upc})}>
-          <Text style={styles.text}> Best Before: {expirationDate} </Text>
+        <View style={{ flexDirection:'row', justifyContent: 'space-between' }}>
+          <Text style={styles.text}> Best Before: {expirationDate}
+          <Icon
+          name='chevron-right' />
+          <Text style={styles.space}>  </Text>
+          </Text>
+        </View>
         </TouchableOpacity>
         <Text style={styles.space}>  </Text>
         <Button
@@ -110,6 +116,10 @@ export default class AddDate extends Component {
                     onPress={() => this.props.navigation.navigate('EnterDate')}
                     color="#FFFFF"
                 />
+        <Text style={styles.space}>  </Text>
+        <Text style={styles.rowText}>
+        The Period After Opening symbol identifies the useful lifetime of a cosmetic product after its package has been opened for the first time.
+        </Text>
       </View>
     );
   }
@@ -133,7 +143,7 @@ const styles = StyleSheet.create({
   },
   textbox: {
     height: 30,
-    width: 80,
+    width: 100,
     marginRight: 10,
     marginLeft: 30,
     backgroundColor: '#FFFFFF',
@@ -143,7 +153,7 @@ const styles = StyleSheet.create({
     color: '#000000',
   },
   text: {
-    marginRight: 10,
+    marginRight: 20,
     marginLeft: 10,
     paddingTop: 15,
   },
@@ -154,5 +164,14 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     height: 40,
     width: 80,
+  },
+  rowText: {
+    paddingTop: 10,
+    fontSize: 16,
+    paddingLeft: 10,
+    paddingRight: 10,
+    color: '#777',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });

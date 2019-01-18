@@ -57,7 +57,7 @@ export default class AddDate extends Component {
     }).then((json) => {
       console.log(json.ok)
       if(json.ok == false) {
-        Alert.alert("Product is already in database")
+        Alert.alert(json.message.join())
       } else {
         this.props.navigation.navigate('Main')
       }

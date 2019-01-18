@@ -18,6 +18,8 @@ import {
 } from 'react-native';
 
 import Item from './Product';
+import ShowProduct from './ShowProduct';
+
 
 export default class AddDate extends Component {
 
@@ -140,6 +142,7 @@ export default class AddDate extends Component {
            />
           </Text>
         </View>
+        <Text styles={styles.text}> Brand: {this.state.brand} </Text>
         </TouchableOpacity>
         <Text style={styles.space}>  </Text>
         <Button
@@ -184,8 +187,8 @@ const styles = StyleSheet.create({
   },
   text: {
     marginRight: 20,
-    marginLeft: 10,
     paddingTop: 15,
+    marginLeft: 0,
   },
   space: {
     paddingTop: 60

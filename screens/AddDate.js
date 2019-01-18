@@ -43,7 +43,7 @@ export default class AddDate extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        image: photo,
+        image: this.state.image,
         name: this.state.name,
         upc: this.state.upc,
         date: date,

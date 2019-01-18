@@ -6,6 +6,8 @@ import TabBarIcon from '../components/TabBarIcon';
 import AddProduct from '../screens/AddProduct';
 import SettingsScreen from '../screens/SettingsScreen';
 import ProductList from '../screens/ProductList';
+import TakePhoto from '../screens/takephoto';
+
 
 
 const ProductsStack = createStackNavigator({
@@ -52,9 +54,23 @@ SettingsStack.navigationOptions = {
   ),
 };
 
+const TakePhotoStack = createStackNavigator({
+  TakePhoto: TakePhoto,
+});
+
+TakePhotoStack.navigationOptions = {
+  tabBarLabel: 'TakePhoto',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-information-circle-outline' : 'md-options'}
+    />
+  ),
+};
 
 export default createBottomTabNavigator({
   ProductsStack,
   AddProductStack,
   SettingsStack,
+  TakePhotoStack
 });

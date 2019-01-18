@@ -24,6 +24,8 @@ export default class AddDate extends Component {
      this.state = {
        text:"",
        isLoading: true,
+       hasCameraPermission: null,
+       type: Camera.Constants.Type.back,
      };
    }
 
@@ -39,7 +41,7 @@ export default class AddDate extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        image: this.state.image,
+        image: photo,
         name: this.state.name,
         upc: this.state.upc,
         date: date,
@@ -89,6 +91,9 @@ export default class AddDate extends Component {
       .catch((error) =>{
         console.log(error)
        });
+  }
+
+  takePicture(){
   }
 
   render() {
@@ -142,6 +147,12 @@ export default class AddDate extends Component {
                     onPress={() => this.postInfotoAPI()}
                     color="#FFFFF"
                 />
+        <Button
+                    title="Take Photo"
+                    onPress={() => this.props.navigation.navigate('TakePhoto', {upc: this.state.upc})}
+                    color="#FFFFF"
+                />
+
         <Text style={styles.space}>  </Text>
         <Text style={styles.rowText}>
         </Text>

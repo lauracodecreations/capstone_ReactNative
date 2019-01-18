@@ -4,6 +4,7 @@ import { Button } from 'react-native-elements';
 import { Header } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation'
 import { Camera, Permissions } from 'expo';
+import { ImagePicker } from 'expo';
 
 import {
   StatusBar,
@@ -12,6 +13,7 @@ import {
   Text,
   Alert,
   View,
+  Image,
   TouchableOpacity
 } from 'react-native';
 
@@ -96,9 +98,24 @@ export default class AddDate extends Component {
   takePicture(){
   }
 
+  _pickImage = async () => {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+    }
+  };
+
   render() {
     const { navigation } = this.props;
     const expirationDate = navigation.getParam('date', 'Not specified');
+    let { image } = this.state;
     return (
       <View style={styles.container}>
 
@@ -152,7 +169,12 @@ export default class AddDate extends Component {
                     onPress={() => this.props.navigation.navigate('TakePhoto', {upc: this.state.upc})}
                     color="#FFFFF"
                 />
-
+                <Button
+             title="Pick an image from camera roll"
+             onPress={this._pickImage}
+           />
+           {image &&
+             <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
         <Text style={styles.space}>  </Text>
         <Text style={styles.rowText}>
         </Text>

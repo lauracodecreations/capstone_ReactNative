@@ -3,6 +3,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button } from 'react-native-elements';
 import { Header } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation'
+import { Camera, Permissions } from 'expo';
+
 import {
   StatusBar,
   StyleSheet,
@@ -58,12 +60,6 @@ export default class AddDate extends Component {
     });
   }
 
-  alertScreen() {
-    Alert.alert(
-      'Product is already in the dataset',
-   );
-  }
-
   componentDidMount(){
     const { navigation } = this.props;
     const upc = navigation.getParam('upc', 'NO-UPC');
@@ -74,9 +70,13 @@ export default class AddDate extends Component {
       if (json.code != "OK") {
         Alert.alert(json.message)
       }
+
+      if (json.items[0].images[0] == undefined) {
+        Alert.alert("No image avaiable")
+      }
         this.setState({
           isLoading: false,
-          image: json.items[0].images[1],
+          image: json.items[0].images[0],
           name: json.items[0].title,
           brand: json.items[0].brand,
           description: json.items[0].description,

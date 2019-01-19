@@ -42,11 +42,7 @@ export default class AddDate extends Component {
    if (status === 'granted') {
      this.allCalendars();}
     else {
-      showMessage({
-        message: "Could not access calendars",
-        type: "danger",
-        floating: true
-      })
+      Alert.alert("could not acess your calendar")
     }
   }
 
@@ -59,9 +55,9 @@ export default class AddDate extends Component {
          event.forEach(function(calendar) {
 
           if(calendar.accessLevel == "owner") {
-            my_id = calendar.id
-            console.log(my_id)
-            Alert.alert("it works!")
+            this.setState({
+            my_id: calendar.id
+            });
           }
         })
        })
@@ -70,7 +66,27 @@ export default class AddDate extends Component {
        });
    }
 
-
+   addToCalendar = (name, due_date, brand, upc, color) => {
+     this.accessCalendars()
+      let productDetails = {
+        title: `Throw away your ${name}!`,
+        brand: brand,
+        color: color,
+        upc: upc,
+        timeZone: 'PST',
+      }
+      if (this.state.my_id) {
+        Calendar.createEventAsync(this.state.my_id, productDetails)
+          .then( event => {
+            Alert.alert(`${name} added to your calendar`)
+          })
+          .catch( error => {
+            Alert.alert(`Could not add ${name} to your calendar`)
+        })}
+       else {
+         Alert.alert(`Could not add ${name} to your calendar without calendar access`)
+     }
+   }
 
   postInfotoAPI() {
     const { navigation } = this.props;
@@ -94,17 +110,20 @@ export default class AddDate extends Component {
     }).then(function(response) {
       return response.json()
     }).then((json) => {
-      console.log(json.ok)
+      console.log(json)
+      this.setState({
+        due_date: json.date
+      })
       if(json.ok == false) {
         Alert.alert(json.message.join())
       } else {
+        this.addToCalendar(this.state.name, this.state.due_date, this.state.brand, this.state.upc, this.state.color)
         this.props.navigation.navigate('Main')
       }
     });
   }
 
   componentDidMount(){
-    this.accessCalendars()
     const { navigation } = this.props;
     const upc = navigation.getParam('upc', 'NO-UPC');
     return fetch(`https://api.upcitemdb.com/prod/trial/lookup?upc=${upc}`)

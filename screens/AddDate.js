@@ -5,6 +5,8 @@ import { Header } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation'
 import { Camera, Permissions } from 'expo';
 import { ImagePicker } from 'expo';
+import { Expo, Constants, Calendar} from 'expo';
+
 
 import {
   StatusBar,
@@ -31,6 +33,41 @@ export default class AddDate extends Component {
        hasCameraPermission: null,
        type: Camera.Constants.Type.back,
      };
+     this.accessCalendars = this.accessCalendars.bind(this);
+   }
+
+   async accessCalendars() {
+
+   const { status } = await Permissions.askAsync(Permissions.CALENDAR);
+   if (status === 'granted') {
+     this.allCalendars();}
+    else {
+      showMessage({
+        message: "Could not access calendars",
+        type: "danger",
+        floating: true
+      })
+    }
+  }
+
+  allCalendars = () => {
+
+     Calendar.getCalendarsAsync()
+       .then( event => {
+
+         let my_id = 0
+         event.forEach(function(calendar) {
+
+          if(calendar.accessLevel == "owner") {
+            my_id = calendar.id
+            console.log(my_id)
+            Alert.alert("it works!")
+          }
+        })
+       })
+       .catch( error => {
+         Alert.alert("Could not find you calendar")
+       });
    }
 
 
@@ -67,6 +104,7 @@ export default class AddDate extends Component {
   }
 
   componentDidMount(){
+    this.accessCalendars()
     const { navigation } = this.props;
     const upc = navigation.getParam('upc', 'NO-UPC');
     return fetch(`https://api.upcitemdb.com/prod/trial/lookup?upc=${upc}`)

@@ -128,10 +128,10 @@ export default class AddDate extends Component {
         />
         <Text></Text>
         <View style={{ flexDirection:'row' }}>
-          <Text style={styles.text}> Period After Opening: </Text>
+          <Text style={styles.text}> Period After Opening (number): </Text>
           <TextInput
                   style={styles.textbox}
-                  placeholder="PAO number"
+                  placeholder="PAO"
                   autofocus={true}
                   label="PAO"
                   onChangeText={(text) => this.setState({text})}
@@ -140,10 +140,12 @@ export default class AddDate extends Component {
         </View>
         <TouchableOpacity onPress={() => this.props.navigation.navigate('EnterDate', {upc: this.state.upc})}>
         <View style={{ flexDirection:'row', justifyContent: 'space-between' }}>
-          <Text style={styles.text}> Best Before: {expirationDate} <Text></Text>
+          <Text style={styles.text}> Best Before: </Text>
+          <Text style={styles.textwhite}> {expirationDate} <Text></Text>
           <Icon
           name='edit'
           size={20}
+          backgroundColor='#000000'
            />
           </Text>
         </View>
@@ -181,9 +183,7 @@ const styles = StyleSheet.create({
   },
   textbox: {
     height: 30,
-    width: 100,
-    marginRight: 10,
-    marginLeft: 30,
+    width: 37,
     backgroundColor: '#FFFFFF',
     borderColor: 'gray',
     borderWidth: 1,
@@ -194,6 +194,10 @@ const styles = StyleSheet.create({
     marginRight: 20,
     paddingTop: 15,
     marginLeft: 0,
+  },
+  textwhite: {
+    paddingTop: 15,
+    backgroundColor: '#FFFFFF',
   },
   space: {
     paddingTop: 60

@@ -5,19 +5,37 @@ import {
     View,
     Image,
     ScrollView,
+    ActivityIndicator
 } from 'react-native';
 
 
 class Report extends Component {
   constructor(props) {
      super(props);
+     this.state = {
+       isLoading: true
+     };
    }
 
+   componentDidMount(){
+     this.setState({
+       isLoading: false
+     });
+   }
    render() {
+     if(this.state.isLoading){
+       return(
+         <View style={{flex: 1, padding: 20}}>
+           <ActivityIndicator/>
+         </View>
+       )
+     }
      return (
        <View style={styles.container}>
        <ScrollView style={styles.container}>
        <View style={styles.image}>
+         <Text style={styles.upc}>
+         </Text>
          <Image source={{uri: this.props.image}}
          style={{width: 200, height: 200}}/>
          <Text style={styles.upc}> {this.props.upc}  </Text>

@@ -15,7 +15,8 @@ import {
   Alert,
   View,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from 'react-native';
 
 import Item from './Product';
@@ -27,7 +28,7 @@ export default class AddDate extends Component {
   constructor(props) {
      super(props);
      this.state = {
-       text:"",
+       text:"Not yet defined",
        isLoading: true,
        hasCameraPermission: null,
        type: Camera.Constants.Type.back,
@@ -115,13 +116,7 @@ export default class AddDate extends Component {
         <StatusBar
           barStyle="light-content"
         />
-        <Item
-          date={this.state.date}
-          title={this.state.name}
-          upc={this.state.upc}
-          thumbnail={this.state.image}
-          navigation={this.props.navigation}
-        />
+        <ScrollView style={styles.container}>
         <Report
           image={this.state.image}
           name={this.state.name}
@@ -129,6 +124,7 @@ export default class AddDate extends Component {
           brand={this.state.brand}
           color={this.state.color}
           upc={this.state.upc}
+          date={this.state.text}
         />
         <Text></Text>
         <View style={{ flexDirection:'row' }}>
@@ -151,7 +147,6 @@ export default class AddDate extends Component {
            />
           </Text>
         </View>
-        <Text styles={styles.text}> Brand: {this.state.brand} </Text>
         </TouchableOpacity>
         <Text style={styles.space}>  </Text>
         <Button
@@ -162,6 +157,7 @@ export default class AddDate extends Component {
         <Text style={styles.space}>  </Text>
         <Text style={styles.rowText}>
         </Text>
+        </ScrollView>
       </View>
     );
   }

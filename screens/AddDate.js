@@ -5,6 +5,7 @@ import { Header } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation'
 import { Camera, Permissions } from 'expo';
 import { ImagePicker } from 'expo';
+import  Report  from '../components/Report'
 
 import {
   StatusBar,
@@ -120,6 +121,14 @@ export default class AddDate extends Component {
           upc={this.state.upc}
           thumbnail={this.state.image}
           navigation={this.props.navigation}
+        />
+        <Report
+          image={this.state.image}
+          name={this.state.name}
+          description={this.state.description}
+          brand={this.state.brand}
+          color={this.state.color}
+          upc={this.state.upc}
         />
         <Text></Text>
         <View style={{ flexDirection:'row' }}>

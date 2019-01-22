@@ -17,7 +17,7 @@ export default class SettingsScreen extends React.Component {
    }
 
   componentDidMount() {
-   this.accessCalendars()
+   this.accessCalendars();
   }
 
   async accessCalendars() {
@@ -31,24 +31,38 @@ export default class SettingsScreen extends React.Component {
    }
 
   allCalendars = () => {
+
+    let details = {
+      title: 'Test2!!',
+      startDate: new Date('January 19, 2019, 12:00:00'),
+      endDate: new Date('January 20, 2019, 13:00:00'),
+      timeZone: 'PST',
+      notes: 'Remember to discard item ? week!'
+    }
     Calendar.getCalendarsAsync()
       .then( event => {
         console.log(event);
-        let my_id = 0
         event.forEach(function (calendar) {
-          console.log(calendar.title);
+          console.log(calendar.id);
           if(calendar.title == "Expire") {
-            my_id = calendar.id
+            let event_id = ''
+            Calendar.createEventAsync(calendar.id, details)
+              .then( event => {
+                event_id = event.toString()
+
+              })
+              .catch( error => {
+                console.log((error));
+              });
           }
        })
-       this.setState({calendar_id: my_id})
-        console.log(this.state.calendar_id);
       })
       .catch( error => {
         console.log(("error"));
         console.log((error));
       });
   }
+
   render() {
     /* Go ahead and delete ExpoConfigView and replace it with your
      * content, we just wanted to give you a quick view of your config       <ExpoConfigView />

@@ -1,12 +1,43 @@
 import React from 'react';
 import { ExpoConfigView } from '@expo/samples';
 import { Text, View, Linking, ScrollView, StyleSheet} from 'react-native';
+import { Expo, Constants, Calendar, Permissions} from 'expo';
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
     title: 'app.json',
   };
 
+  componentDidMount() {
+   this.accessCalendars()
+  }
+
+  async accessCalendars() {
+
+    const { status } = await Permissions.askAsync(Permissions.CALENDAR);
+    if (status === 'granted') {
+      return this.allCalendars();}
+     else {
+       console.log();('permission not granted');
+     }
+   }
+
+  allCalendars() {
+    let details = {
+      title: 'myCalendar',
+      color: 'blue',
+      entityType: Calendar.EntityTypes.REMINDER,
+      sourceId: 'my_calendar_1'
+    };
+
+    Calendar.getCalendarsAsync()
+      .then( event => {
+        console.log(event);
+      })
+      .catch( error => {
+        console.log(("error"));
+      });
+  }
   render() {
     /* Go ahead and delete ExpoConfigView and replace it with your
      * content, we just wanted to give you a quick view of your config       <ExpoConfigView />

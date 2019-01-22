@@ -6,6 +6,7 @@ import { StackNavigator } from 'react-navigation'
 import { Camera, Permissions } from 'expo';
 import { ImagePicker } from 'expo';
 import { Expo, Constants, Calendar} from 'expo';
+import  Report  from '../components/Report'
 
 
 import {
@@ -16,7 +17,8 @@ import {
   Alert,
   View,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from 'react-native';
 
 import Item from './Product';
@@ -28,7 +30,7 @@ export default class AddDate extends Component {
   constructor(props) {
      super(props);
      this.state = {
-       text:"",
+       text:"Not yet defined",
        isLoading: true,
        hasCameraPermission: null,
        type: Camera.Constants.Type.back,
@@ -171,19 +173,22 @@ export default class AddDate extends Component {
         <StatusBar
           barStyle="light-content"
         />
-        <Item
-          date={this.state.date}
-          title={this.state.name}
+        <ScrollView style={styles.container}>
+        <Report
+          image={this.state.image}
+          name={this.state.name}
+          description={this.state.description}
+          brand={this.state.brand}
+          color={this.state.color}
           upc={this.state.upc}
-          thumbnail={this.state.image}
-          navigation={this.props.navigation}
+          date={this.state.text}
         />
         <Text></Text>
         <View style={{ flexDirection:'row' }}>
-          <Text style={styles.text}> Period After Opening: </Text>
+          <Text style={styles.text}> Period After Opening (number): </Text>
           <TextInput
                   style={styles.textbox}
-                  placeholder="PAO number"
+                  placeholder="PAO"
                   autofocus={true}
                   label="PAO"
                   onChangeText={(text) => this.setState({text})}
@@ -192,14 +197,15 @@ export default class AddDate extends Component {
         </View>
         <TouchableOpacity onPress={() => this.props.navigation.navigate('EnterDate', {upc: this.state.upc})}>
         <View style={{ flexDirection:'row', justifyContent: 'space-between' }}>
-          <Text style={styles.text}> Best Before: {expirationDate} <Text></Text>
+          <Text style={styles.text}> Best Before: </Text>
+          <Text style={styles.textwhite}> {expirationDate} <Text></Text>
           <Icon
           name='edit'
           size={20}
+          backgroundColor='#000000'
            />
           </Text>
         </View>
-        <Text styles={styles.text}> Brand: {this.state.brand} </Text>
         </TouchableOpacity>
         <Text style={styles.space}>  </Text>
         <Button
@@ -210,6 +216,7 @@ export default class AddDate extends Component {
         <Text style={styles.space}>  </Text>
         <Text style={styles.rowText}>
         </Text>
+        </ScrollView>
       </View>
     );
   }
@@ -233,9 +240,7 @@ const styles = StyleSheet.create({
   },
   textbox: {
     height: 30,
-    width: 100,
-    marginRight: 10,
-    marginLeft: 30,
+    width: 37,
     backgroundColor: '#FFFFFF',
     borderColor: 'gray',
     borderWidth: 1,
@@ -246,6 +251,10 @@ const styles = StyleSheet.create({
     marginRight: 20,
     paddingTop: 15,
     marginLeft: 0,
+  },
+  textwhite: {
+    paddingTop: 15,
+    backgroundColor: '#FFFFFF',
   },
   space: {
     paddingTop: 60

@@ -33,18 +33,22 @@ export default class SettingsScreen extends React.Component {
   allCalendars = () => {
 
     let details = {
-      title: 'Test2!!',
+      title: 'Test22!!',
       startDate: new Date('January 19, 2019, 12:00:00'),
       endDate: new Date('January 20, 2019, 13:00:00'),
       timeZone: 'PST',
-      notes: 'Remember to discard item ? week!'
+      notes: 'Remember to discard item ? week!',
+      alerts: [{
+        method: Calendar.AlarmMethod.DEFAULT
+      }
+      ]
     }
     Calendar.getCalendarsAsync()
       .then( event => {
         console.log(event);
         event.forEach(function (calendar) {
           console.log(calendar.id);
-          if(calendar.title == "Expire") {
+          if(calendar.title == "davidprestige1@gmail.com") {
             let event_id = ''
             Calendar.createEventAsync(calendar.id, details)
               .then( event => {

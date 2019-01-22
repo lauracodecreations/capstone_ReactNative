@@ -33,7 +33,7 @@ export default class SettingsScreen extends React.Component {
   allCalendars = () => {
 
     let details = {
-      title: 'Test22!!',
+      title: 'Test23!!',
       startDate: new Date('January 19, 2019, 12:00:00'),
       endDate: new Date('January 20, 2019, 13:00:00'),
       timeZone: 'PST',
@@ -48,7 +48,7 @@ export default class SettingsScreen extends React.Component {
         console.log(event);
         event.forEach(function (calendar) {
           console.log(calendar.id);
-          if(calendar.title == "davidprestige1@gmail.com") {
+          if(calendar.title.endsWith('.com')) {
             let event_id = ''
             Calendar.createEventAsync(calendar.id, details)
               .then( event => {

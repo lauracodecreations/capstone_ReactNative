@@ -6,6 +6,8 @@ import AddDate from '../screens/AddDate';
 import AddProduct from '../screens/AddProduct';
 import EnterDate from '../screens/EnterDate';
 import TakePhoto from '../screens/takephoto';
+import UpdateDate from '../screens/UpdateDate';
+
 
 
 
@@ -26,6 +28,7 @@ export default createSwitchNavigator({
   ProductList: ProductList,
   AddProduct: AddProduct,
   EnterDate: EnterDate,
-  TakePhoto: TakePhoto
+  TakePhoto: TakePhoto,
+  UpdateDate: UpdateDate,
 
 });

@@ -6,6 +6,7 @@ import {
     Alert,
     Image,
     ScrollView,
+    TouchableOpacity,
     ActivityIndicator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -85,7 +86,10 @@ export default class ShowProduct extends Component {
         </View>
       )
     }
+    const expirationDate = navigation.getParam('date', 'Not specified');
+
     return (
+
       <View style={styles.container}>
       <Header
         leftComponent={{ icon: 'arrow-back', color: '#fff',onPress: () => this.props.navigation.navigate('Main') }}
@@ -106,6 +110,18 @@ export default class ShowProduct extends Component {
       <Text style={styles.rowText}> {this.state.description} </Text>
       <Text style={styles.rowText}> Color: {this.state.color} </Text>
       <Text style={styles.rowText}> Brand: {this.state.brand} </Text>
+      <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateDate', {upc: this.state.upc})}>
+      <View style={{ flexDirection:'row', justifyContent: 'space-between' }}>
+        <Text style={styles.text}> Best Before: </Text>
+        <Text style={styles.textwhite}> {expirationDate} <Text></Text>
+        <Icon
+        name='edit'
+        size={20}
+        backgroundColor='#000000'
+         />
+        </Text>
+      </View>
+      </TouchableOpacity>
       </ScrollView>
       </View>
     );

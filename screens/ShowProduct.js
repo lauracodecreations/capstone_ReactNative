@@ -78,6 +78,7 @@ export default class ShowProduct extends Component {
     const { navigation } = this.props;
     const upc = navigation.getParam('upc', 'NO-UPC');
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const options2 = { year: 'numeric', month: 'short', day: 'numeric' };
     const date = new Date(`${this.state.date}`)
     if(this.state.isLoading){
       return(
@@ -112,8 +113,10 @@ export default class ShowProduct extends Component {
       <Text style={styles.rowText}> Brand: {this.state.brand} </Text>
       <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateDate', {upc: this.state.upc})}>
       <View style={{ flexDirection:'row', justifyContent: 'space-between' }}>
-        <Text style={styles.text}> Best Before: </Text>
-        <Text style={styles.textwhite}> {expirationDate} <Text></Text>
+        <Text style={styles.rowText}> Best Before: </Text>
+        <Text style={styles.rowText2}>
+        {expirationDate == "Not specified"? `${date.toLocaleDateString("en-US", options2)}`: `${expirationDate}`}
+        <Text></Text>
         <Icon
         name='edit'
         size={20}
@@ -171,6 +174,15 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     color: '#777',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  rowText2: {
+    paddingTop: 10,
+    fontSize: 16,
+    paddingRight: 10,
+    color: '#777',
+    backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center'
   }

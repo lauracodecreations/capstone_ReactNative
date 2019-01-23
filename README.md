@@ -13,6 +13,7 @@ $ brew install node
 $ brew install watchman
 $ npm install -g react-native-cli
 $ npm install --save react-native-elements@beta
+$ npm install --save react-native-flash-message
 $ npm start
 ```
 To be edited with real LINK:

@@ -115,6 +115,13 @@ export default class AddDate extends Component {
    }
 
    allCalendars = (date) => {
+     // let parts = date.split('-');
+     // let startdate = new Date(`${parts[0]}-${parts[1]}-${parts[2] - 1}`);
+     // console.log("!!!!!!!!!!!")
+     // console.log(date)
+     // console.log(startdate)
+     // console.log("^^^^^^^^^")
+
      let details = {
        title: this.state.name,
        startDate: new Date(`${date}`),

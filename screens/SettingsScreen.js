@@ -4,7 +4,7 @@ import { Text, Linking, ScrollView, StyleSheet} from 'react-native';
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
-    title: 'app.json',
+    title: 'App Info',
   };
 
   render() {
@@ -29,7 +29,7 @@ export default class SettingsScreen extends React.Component {
             <Text style={styles.link} onPress={githubLink}>
               {`\n        lauramar6261 \n\n`}
               </Text>
-          {`Products data: \n`}
+          {`Product information provided by: \n`}
             <Text style={styles.link} onPress={data}>
               {`\n        UPCitemdb API \n\n`}
               </Text>

@@ -37,9 +37,17 @@ export default class ShowProduct extends Component {
 
   }
 
-  updateInfotoAPI(upc) {
+  updateInfotoAPI(upc, expirationDate) {
+    console.log(expirationDate)
     fetch(`https://productsbarcode.herokuapp.com/products/${upc}`, {
       method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        date: expirationDate,
+      }),
     });
     showMessage({
        message: 'Item successfully updated.',
@@ -138,7 +146,7 @@ export default class ShowProduct extends Component {
       <Text style={styles.space}>  </Text>
       <Button
                   title="Update Product"
-                  onPress={() => this.updateInfotoAPI(this.state.upc)}
+                  onPress={() => this.updateInfotoAPI(this.state.upc, expirationDate)}
                   color="#FFFFF"
                   buttonStyle={{
                     width: 290,

@@ -36,6 +36,17 @@ export default class ShowProduct extends Component {
     this.props.navigation.navigate('Main')
 
   }
+
+  updateInfotoAPI(upc) {
+    fetch(`https://productsbarcode.herokuapp.com/products/${upc}`, {
+      method: 'PUT',
+    });
+    showMessage({
+       message: 'Item successfully updated.',
+       type: "success",
+     });
+    this.props.navigation.navigate('Main')
+  }
   alertScreen(upc) {
     Alert.alert(
       'Delete Product',
@@ -124,6 +135,23 @@ export default class ShowProduct extends Component {
          />
         </Text>
       </View>
+      <Text style={styles.space}>  </Text>
+      <Button
+                  title="Update Product"
+                  onPress={() => this.updateInfotoAPI(this.state.upc)}
+                  color="#FFFFF"
+                  buttonStyle={{
+                    width: 290,
+                    height: 45,
+                    borderColor: "transparent",
+                    borderWidth: 0,
+                    borderRadius: 5,
+                    alignItems:'center',
+                    justifyContent:'center',
+                    marginRight: 10,
+                    marginLeft: 30,
+                  }}
+              />
       </TouchableOpacity>
       </ScrollView>
       </View>
@@ -135,6 +163,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    marginLeft: 5,
+    marginRight: 5,
+
   },
   image: {
     flex:1,
@@ -185,5 +216,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center'
-  }
+  },
+  space: {
+    paddingTop: 20
+  },
 });

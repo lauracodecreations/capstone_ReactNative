@@ -135,9 +135,9 @@ export default class AddDate extends Component {
      }
      Calendar.getCalendarsAsync()
        .then( event => {
-         console.log(event);
+         //console.log(event);
          event.forEach(function (calendar) {
-           console.log(calendar.id);
+           //console.log(calendar.id);
            if(calendar.title.endsWith('.com')) {
              let event_id = ''
              Calendar.createEventAsync(calendar.id, details)

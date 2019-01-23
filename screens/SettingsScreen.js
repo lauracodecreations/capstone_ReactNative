@@ -1,71 +1,11 @@
 import React from 'react';
 import { ExpoConfigView } from '@expo/samples';
-import { Text, View, Linking, ScrollView, StyleSheet} from 'react-native';
-import { Expo, Constants, Calendar, Permissions} from 'expo';
+import { Text, Linking, ScrollView, StyleSheet} from 'react-native';
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
     title: 'app.json',
   };
-
-  constructor(props) {
-     super(props);
-     this.state = {
-       calendar_id: ''
-     };
-     this.accessCalendars = this.accessCalendars.bind(this);
-   }
-
-  componentDidMount() {
-   this.accessCalendars();
-  }
-
-  async accessCalendars() {
-
-    const { status } = await Permissions.askAsync(Permissions.CALENDAR);
-    if (status === 'granted') {
-      this.allCalendars();}
-     else {
-       console.log();('permission not granted');
-     }
-   }
-
-  allCalendars = () => {
-
-    let details = {
-      title: 'Test23!!',
-      startDate: new Date('January 19, 2019, 12:00:00'),
-      endDate: new Date('January 20, 2019, 13:00:00'),
-      timeZone: 'PST',
-      notes: 'Remember to discard item ? week!',
-      alerts: [{
-        method: Calendar.AlarmMethod.DEFAULT
-      }
-      ]
-    }
-    Calendar.getCalendarsAsync()
-      .then( event => {
-        console.log(event);
-        event.forEach(function (calendar) {
-          console.log(calendar.id);
-          if(calendar.title.endsWith('.com')) {
-            let event_id = ''
-            Calendar.createEventAsync(calendar.id, details)
-              .then( event => {
-                event_id = event.toString()
-
-              })
-              .catch( error => {
-                console.log((error));
-              });
-          }
-       })
-      })
-      .catch( error => {
-        console.log(("error"));
-        console.log((error));
-      });
-  }
 
   render() {
     /* Go ahead and delete ExpoConfigView and replace it with your

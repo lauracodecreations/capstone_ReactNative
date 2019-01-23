@@ -11,6 +11,8 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button } from 'react-native-elements';
 import { Header } from 'react-native-elements';
+import { showMessage, hideMessage } from "react-native-flash-message";
+
 
 export default class ShowProduct extends Component {
 
@@ -26,6 +28,10 @@ export default class ShowProduct extends Component {
     fetch(`https://productsbarcode.herokuapp.com/products/${upc}`, {
       method: 'DELETE',
     });
+    showMessage({
+       message: 'Item successfully deleted.',
+       type: "success",
+     });
     this.props.navigation.navigate('Main')
 
   }

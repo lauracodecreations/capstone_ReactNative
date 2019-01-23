@@ -7,6 +7,8 @@ import { Camera, Permissions } from 'expo';
 import { ImagePicker } from 'expo';
 import  Report  from '../components/Report'
 import { Expo, Constants, Calendar} from 'expo';
+import { showMessage, hideMessage } from "react-native-flash-message";
+
 
 
 import {
@@ -62,8 +64,8 @@ export default class AddDate extends Component {
     }).then(function(response) {
       return response.json()
     }).then((json) => {
-      console.log("!!!!!!!!!!!!!!!!!!!!!")
-      console.log(json.date)
+      //console.log("!!!!!!!!!!!!!!!!!!!!!")
+      //console.log(json.date)
       if(json.ok == false) {
         Alert.alert(json.message.join())
       } else {
@@ -139,14 +141,21 @@ export default class AddDate extends Component {
          event.forEach(function (calendar) {
            //console.log(calendar.id);
            if(calendar.title.endsWith('.com')) {
+             let email = calendar.title
              let event_id = ''
              Calendar.createEventAsync(calendar.id, details)
                .then( event => {
                  event_id = event.toString()
-
+                 showMessage({
+                  message: 'Item added to your email calendar!',
+                  type: "success",
+                });
                })
                .catch( error => {
-                 console.log((error));
+                 showMessage({
+                  message: 'Item was not added to your email calendar.',
+                  type: "danger",
+                });
                });
            }
         })

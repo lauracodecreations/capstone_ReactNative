@@ -2,7 +2,8 @@ import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
-import Wrapper from './screens/Wrapper';
+import FlashMessage from "react-native-flash-message";
+
 
 
 export default class App extends React.Component {
@@ -24,7 +25,7 @@ export default class App extends React.Component {
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           <AppNavigator />
-          <Wrapper />
+          <FlashMessage position="top" />
         </View>
       );
     }

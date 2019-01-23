@@ -24,6 +24,7 @@ export default class App extends Component {
 
   render() {
     const date = this.state.chosenDate
+    console.log(date)
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     const formatted_date = date.toLocaleDateString("en-US", options)
     const { navigation } = this.props;

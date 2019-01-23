@@ -6,6 +6,8 @@ import { StackNavigator } from 'react-navigation'
 import { Camera, Permissions } from 'expo';
 import { ImagePicker } from 'expo';
 import  Report  from '../components/Report'
+import { Expo, Constants, Calendar} from 'expo';
+
 
 import {
   StatusBar,
@@ -33,6 +35,7 @@ export default class AddDate extends Component {
        hasCameraPermission: null,
        type: Camera.Constants.Type.back,
      };
+    this.accessCalendars = this.accessCalendars.bind(this);
    }
 
 
@@ -59,10 +62,12 @@ export default class AddDate extends Component {
     }).then(function(response) {
       return response.json()
     }).then((json) => {
-      console.log(json.ok)
+      console.log("!!!!!!!!!!!!!!!!!!!!!")
+      console.log(json.date)
       if(json.ok == false) {
         Alert.alert(json.message.join())
       } else {
+        this.accessCalendars(json.date);
         this.props.navigation.navigate('Main')
       }
     });
@@ -99,6 +104,51 @@ export default class AddDate extends Component {
        });
   }
 
+  async accessCalendars(date) {
+
+    const { status } = await Permissions.askAsync(Permissions.CALENDAR);
+    if (status === 'granted') {
+      this.allCalendars(date);}
+     else {
+       console.log();('permission not granted');
+     }
+   }
+
+   allCalendars = (date) => {
+     let details = {
+       title: this.state.name,
+       startDate: new Date(`${date}`),
+       endDate: new Date(`${date}`),
+       timeZone: 'PST',
+       notes: `Remember to discard item ${this.state.name} with UPC number ${this.state.upc}. It expires tomorrow!`,
+       alerts: [{
+         method: Calendar.AlarmMethod.DEFAULT
+       }
+       ]
+     }
+     Calendar.getCalendarsAsync()
+       .then( event => {
+         console.log(event);
+         event.forEach(function (calendar) {
+           console.log(calendar.id);
+           if(calendar.title.endsWith('.com')) {
+             let event_id = ''
+             Calendar.createEventAsync(calendar.id, details)
+               .then( event => {
+                 event_id = event.toString()
+
+               })
+               .catch( error => {
+                 console.log((error));
+               });
+           }
+        })
+       })
+       .catch( error => {
+         console.log(("error"));
+         console.log((error));
+       });
+   }
 
   render() {
     const { navigation } = this.props;

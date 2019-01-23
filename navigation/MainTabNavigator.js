@@ -72,5 +72,4 @@ export default createBottomTabNavigator({
   ProductsStack,
   AddProductStack,
   SettingsStack,
-  TakePhotoStack
 });

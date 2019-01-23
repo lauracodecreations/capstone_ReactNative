@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19003,
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 7725,
+  "packagerPort": 19005,
+  "packagerPid": 69104,
   "expoServerNgrokUrl": "https://cg-rvi.laurab28.skincaretracker.exp.direct",
   "packagerNgrokUrl": "https://packager.cg-rvi.laurab28.skincaretracker.exp.direct",
-  "ngrokPid": 7739
+  "ngrokPid": 69115
 }

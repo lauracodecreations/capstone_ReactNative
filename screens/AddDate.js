@@ -81,7 +81,7 @@ export default class AddDate extends Component {
     return fetch(`https://api.upcitemdb.com/prod/trial/lookup?upc=${upc}`)
     .then((response) => response.json())
     .then((json) => {
-      console.log(json)
+      //console.log(json)
       if (json.code != "OK") {
         Alert.alert(json.message)
       }
@@ -120,7 +120,7 @@ export default class AddDate extends Component {
      // let parts = date.split('-');
      // let startdate = new Date(`${parts[0]}-${parts[1]}-${parts[2] - 1}`);
      // console.log("!!!!!!!!!!!")
-     // console.log(date)
+     console.log(date)
      // console.log(startdate)
      // console.log("^^^^^^^^^")
 

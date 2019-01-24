@@ -13,6 +13,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button } from 'react-native-elements';
 import { Header } from 'react-native-elements';
 import { showMessage, hideMessage } from "react-native-flash-message";
+import { Expo, Constants, Calendar} from 'expo';
+import { Permissions } from 'expo';
+
+
 
 
 export default class ShowProduct extends Component {
@@ -23,7 +27,68 @@ export default class ShowProduct extends Component {
        text:"",
        isLoading: true
      };
+     this.accessCalendars = this.accessCalendars.bind(this);
    }
+
+   async accessCalendars(date) {
+
+     const { status } = await Permissions.askAsync(Permissions.CALENDAR);
+     if (status === 'granted') {
+       this.allCalendars(date);}
+      else {
+        console.log();('permission not granted');
+      }
+    }
+
+    allCalendars = (date) => {
+      // let parts = date.split('-');
+      // let startdate = new Date(`${parts[0]}-${parts[1]}-${parts[2] - 1}`);
+      // console.log("!!!!!!!!!!!")
+      // console.log(date)
+      // console.log(startdate)
+      // console.log("^^^^^^^^^")
+
+      let details = {
+        title: this.state.name,
+        startDate: new Date(`${date}`),
+        endDate: new Date(`${date}`),
+        timeZone: 'PST',
+        notes: `Remember to discard item ${this.state.name} with UPC number ${this.state.upc}. It expires tomorrow!`,
+        alerts: [{
+          method: Calendar.AlarmMethod.DEFAULT
+        }
+        ]
+      }
+      Calendar.getCalendarsAsync()
+        .then( event => {
+          //console.log(event);
+          event.forEach(function (calendar) {
+            //console.log(calendar.id);
+            if(calendar.title.endsWith('.com')) {
+              let email = calendar.title
+              let event_id = ''
+              let dateformat = new Date(date)
+              let tomorrowdate = dateformat + 1
+              let tomorrowformat = new Date(`${tomorrowdate}`)
+              Calendar.getEventsAsync(calendar.id, dateformat, tomorrowformat)
+                .then( event => {
+                  console.log(event)
+                })
+                .catch( error => {
+                  showMessage({
+                   message: 'Item was not added to your email calendar.',
+                   type: "danger",
+                 });
+                });
+            }
+         })
+        })
+        .catch( error => {
+          console.log(("error"));
+          console.log((error));
+        });
+    }
+
 
   deleteItemAPIcall(upc) {
     fetch(`https://productsbarcode.herokuapp.com/products/${upc}`, {
@@ -53,6 +118,7 @@ export default class ShowProduct extends Component {
        message: 'Item successfully updated.',
        type: "success",
      });
+    this.accessCalendars(expirationDate)
     this.props.navigation.navigate('Main')
   }
   alertScreen(upc) {

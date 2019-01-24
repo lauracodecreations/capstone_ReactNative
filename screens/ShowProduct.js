@@ -132,14 +132,14 @@ export default class ShowProduct extends Component {
       <Text style={styles.rowText}> Brand: {this.state.brand} </Text>
       <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateDate', {upc: this.state.upc})}>
       <View style={{ flexDirection:'row', justifyContent: 'space-between' }}>
-        <Text style={styles.rowText}> Best Before: </Text>
+        <Text style={styles.rowText}> Best before: </Text>
         <Text style={styles.rowText2}>
         {expirationDate == "Not specified"? `${date.toLocaleDateString("en-US", options2)}`: `${expirationDate}`}
         <Text></Text>
         <Icon
         name='edit'
         size={20}
-        backgroundColor='#000000'
+        backgroundColor='#1E90FF'
          />
         </Text>
       </View>
@@ -220,8 +220,8 @@ const styles = StyleSheet.create({
   rowText2: {
     paddingTop: 10,
     fontSize: 16,
-    paddingRight: 10,
-    color: '#777',
+    paddingRight: 80,
+    color: '#1E90FF',
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center'

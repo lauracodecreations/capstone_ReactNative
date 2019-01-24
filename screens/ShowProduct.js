@@ -30,17 +30,17 @@ export default class ShowProduct extends Component {
      this.accessCalendars = this.accessCalendars.bind(this);
    }
 
-   async accessCalendars(date) {
+   async accessCalendars(expirationDate, oldDate) {
 
      const { status } = await Permissions.askAsync(Permissions.CALENDAR);
      if (status === 'granted') {
-       this.allCalendars(date);}
+       this.allCalendars(expirationDate, oldDate);}
       else {
         console.log();('permission not granted');
       }
     }
 
-    allCalendars = (date) => {
+    allCalendars = (expirationDate, oldDate) => {
       // let parts = date.split('-');
       // let startdate = new Date(`${parts[0]}-${parts[1]}-${parts[2] - 1}`);
       // console.log("!!!!!!!!!!!")
@@ -50,8 +50,8 @@ export default class ShowProduct extends Component {
 
       let details = {
         title: this.state.name,
-        startDate: new Date(`${date}`),
-        endDate: new Date(`${date}`),
+        startDate: new Date(`${expirationDate}`),
+        endDate: new Date(`${expirationDate}`),
         timeZone: 'PST',
         notes: `Remember to discard item ${this.state.name} with UPC number ${this.state.upc}. It expires tomorrow!`,
         alerts: [{
@@ -65,14 +65,14 @@ export default class ShowProduct extends Component {
           event.forEach(function (calendar) {
             //console.log(calendar.id);
             if(calendar.title.endsWith('.com')) {
-              let email = calendar.title
-              let event_id = ''
-              let dateformat = new Date(date)
+              let dateformat = new Date(oldDate)
               let tomorrowdate = dateformat + 1
               let tomorrowformat = new Date(`${tomorrowdate}`)
-              Calendar.getEventsAsync(calendar.id, dateformat, tomorrowformat)
+              console.log('!!!!!!!!!!!!!')
+              console.log(dateformat)
+              Calendar.getEventsAsync([calendar.id], dateformat, dateformat)
                 .then( event => {
-                  console.log(event)
+                  console.log(event.toString())
                 })
                 .catch( error => {
                   showMessage({
@@ -118,7 +118,7 @@ export default class ShowProduct extends Component {
        message: 'Item successfully updated.',
        type: "success",
      });
-    this.accessCalendars(expirationDate)
+    this.accessCalendars(expirationDate, this.state.date)
     this.props.navigation.navigate('Main')
   }
   alertScreen(upc) {

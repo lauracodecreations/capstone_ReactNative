@@ -146,6 +146,7 @@ export default class AddDate extends Component {
              Calendar.createEventAsync(calendar.id, details)
                .then( event => {
                  event_id = event.toString()
+                 console.log(event_id)
                  showMessage({
                   message: 'Item added to your email calendar!',
                   type: "success",

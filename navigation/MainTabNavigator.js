@@ -7,6 +7,8 @@ import AddProduct from '../screens/AddProduct';
 import SettingsScreen from '../screens/SettingsScreen';
 import ProductList from '../screens/ProductList';
 import TakePhoto from '../screens/takephoto';
+import AddDate from '../screens/AddDate';
+
 
 
 

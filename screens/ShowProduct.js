@@ -160,6 +160,7 @@ export default class ShowProduct extends Component {
                     marginLeft: 30,
                   }}
               />
+      <Text style={styles.space}>  </Text>
       </TouchableOpacity>
       </ScrollView>
       </View>
@@ -173,7 +174,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     marginLeft: 5,
     marginRight: 5,
-
   },
   image: {
     flex:1,
@@ -192,6 +192,7 @@ const styles = StyleSheet.create({
   },
   upc: {
     paddingLeft: 10,
+    paddingTop: 10,
     marginTop: 5,
     fontSize: 14,
     color: '#777',

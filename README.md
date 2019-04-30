@@ -18,7 +18,7 @@ I want to create an app that helps the user keep track of their beauty products 
 ## Tech Stack
 - Front-end: React Native (React iOS and Android)
 - Back-end: 
-     - Amazon API, Walmart API, or [UPC API](https://www.upcitemdb.com)
+     - [UPC API](https://www.upcitemdb.com)
      - Google Calendar API
      - React Native barcode scanner 
      - Firebase for data storage or Rails API?
